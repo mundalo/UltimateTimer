@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <select name="programs" id="programs">
+      <option value="0">Select exercise</option>
+      <!--default option-->
+      <option value="1">Sitting Pike Stretch</option>
+      <option value="2">Sitting Leg Raise</option>
+      <option value="3">Wall V-Sit</option>
+      <option value="4">Weighted Jefferson Curl</option>
+      <option value="5">Weight. St. Shoulder Extension</option>
+      <option value="6">Lying Weigthed Stick Lift</option>
+      <option value="7">Pre Side Split</option>
+      <option value="8">Horse Stance</option>
+      <option value="9">Standing Side Leg Raise</option>
+      <option value="10">Pre Front Split</option>
+      <option value="11">Wall Quad Hip Flexor Stretch</option>
+      <option value="12">Standing Leg Raise</option>
+    </select>
+    <div>
+      <p id="stage" class="stage">Select exercise</p>
+    </div>
+    <div>
+      <p id="time">00:00</p>
+    </div>
+    <div class="metaData">
+      <div>
+        <p>sets</p>
+        <p id="sets">00</p>
+      </div>
+      <div>
+        <p>cycles</p>
+        <p id="cycles">00</p>
+      </div>
+      <div>
+        <p>total time</p>
+        <p id="totalTime">00:00</p>
+      </div>
+    </div>
+    <div class="navbar">
+      <button id="startButton" class="navButton">start</button>
+      <button id="stopButton" class="navButton" disabled>stop</button>
+      <button id="clearButton" class="navButton" disabled>clear</button>
+    </div>
+  </body>
+  <script>
+    //Buttons
+    const startButton = document.getElementById("startButton");
+    let interval;
+    const stopButton = document.getElementById("stopButton");
+    const clearButton = document.getElementById("clearButton");
+    const timeLabel = document.getElementById("time");
+    const stageLabel = document.getElementById("stage");
+    const programsSelect = document.getElementById("programs");
+    const setsLabel = document.getElementById("sets");
+    const cyclesLabel = document.getElementById("cycles");
+    const totalTimeLabel = document.getElementById("totalTime");
+
+    //audio
+    const beepSound = new Audio(
+      "http://www.orangefreesounds.com/wp-content/uploads/2020/09/Beep-sound-effect.mp3"
+    );
+
+    //Exercise times
+    let index = 0;
+    let setNumber = 1;
+    let cycleNumber = 1;
+
+    let i = 0;
+
+    //TotalTime calculator
+    function calculateTotalTime(exercises) {
+      let total = 0;
+      for (let i = 0; i < exercises.length; i++) {
+        total = total + exercises[i].duration;
+      }
+      return total;
+    }
+
+    //start button click
+    function click(e) {
+      stopButton.disabled = false;
+      clearButton.disabled = false;
+      startButton.disabled = true;
+      let totalTime = calculateTotalTime(arr);
+      clearInterval(interval);
+      interval = setInterval(function () {
+        if (!arr || arr.length === 0) {
+          //when you have select exercise in drop down - nothing in it
+          clear(); //default exercise
+
+          return;
+        }
+
+        i--;
+
+        if (i === 0) {
+          console.log(i);
+          index++;
+          if (index === arr.length) {
+            clear();
+
+            return;
+          }
+
+          i = (arr[index] || {}).duration;
+          console.log(index);
+        }
+
+        //audio
+        if (i <= 3) {
+          beepSound.play();
+        }
+        //fix the other sounds
+        //fix sets and cycles 0 in front function
+
+        stageLabel.style.color = arr[index].color;
+        timeLabel.style.color = arr[index].color;
+
+        stageLabel.innerHTML = arr[index].stage;
+        setsLabel.innerHTML = arr[index].sets;
+        cyclesLabel.innerHTML = arr[index].cycles;
+        totalTimeLabel.innerHTML = formatTime(totalTime);
+        totalTime--;
+
+        timeLabel.innerHTML = formatTime(i);
+      }, 1000);
+    }
+
+    //reset function
+    function clear() {
+      startButton.disabled = false;
+      clearInterval(interval);
+      i = programs[programsSelect.value].initialCountdown;
+      index = 0;
+
+      timeLabel.style.color = "white";
+      stageLabel.style.color = "white";
+
+      timeLabel.innerHTML = "00:00";
+      stageLabel.innerHTML = "Select exercise";
+      setsLabel.innerHTML = "00";
+      cyclesLabel.innerHTML = "00";
+      totalTimeLabel.innerHTML = "00:00";
+    }
+
+    //function formats time
+    function formatTime(time) {
+      const sec = time % 60;
+      const minutes = Math.floor(time / 60);
+      let secStr = sec;
+      let minutesStr = minutes;
+
+      if (sec <= 9) {
+        secStr = `0${sec}`;
+      }
+
+      if (minutes <= 9) {
+        minutesStr = `0${minutes}`;
+      }
+
+      return `${minutesStr}:${secStr}`;
+    }
+
+    //stop & clear button click
+    startButton.addEventListener("click", click);
+    stopButton.addEventListener("click", function () {
+      startButton.disabled = false;
+      clearInterval(interval);
+    });
+    clearButton.addEventListener("click", clear);
+    programsSelect.addEventListener("change", function (e) {
+      clear();
+      programs = [
+        {
+          //Select ecercise
+          initialCountdown: 0,
+          exerciseInterval: 0,
+          restInterval: 0,
+          numberOfSets: 0,
+          recoveryInterval: 0,
+          numberOfCycles: 0,
+        },
+        {
+          //Sitting Pike Stretch
+          initialCountdown: 7,
+          exerciseInterval: 120,
+          restInterval: 30,
+          numberOfSets: 2,
+          recoveryInterval: 30,
+          numberOfCycles: 1,
+        },
+        {
+          //Sitting Leg Raise
+          initialCountdown: 7,
+          exerciseInterval: 8,
+          restInterval: 8,
+          numberOfSets: 8,
+          recoveryInterval: 30,
+          numberOfCycles: 3,
+        },
+        {
+          //Wall V-Sit
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 10,
+          numberOfSets: 9,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Weighted Jefferson Curl
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 10,
+          numberOfSets: 12,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Weight. St. Shoulder Extension
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 3,
+          numberOfSets: 8,
+          recoveryInterval: 10,
+          numberOfCycles: 4,
+        },
+        {
+          //Lying Weighted Stick Lift
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 5,
+          numberOfSets: 9,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Pre Side Split
+          initialCountdown: 7,
+          exerciseInterval: 120,
+          restInterval: 30,
+          numberOfSets: 2,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Horse Stance
+          initialCountdown: 7,
+          exerciseInterval: 30,
+          restInterval: 20,
+          numberOfSets: 5,
+          recoveryInterval: 30,
+          numberOfCycles: 3,
+        },
+        {
+          //Standing Side Leg Raise
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 5,
+          numberOfSets: 9,
+          recoveryInterval: 5,
+          numberOfCycles: 2,
+        },
+        {
+          //Pre Front Split
+          initialCountdown: 7,
+          exerciseInterval: 120,
+          restInterval: 10,
+          numberOfSets: 4,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Wall Quad Hip Flexor Stretch
+          initialCountdown: 7,
+          exerciseInterval: 120,
+          restInterval: 10,
+          numberOfSets: 4,
+          recoveryInterval: 0,
+          numberOfCycles: 1,
+        },
+        {
+          //Standing Leg Raise
+          initialCountdown: 7,
+          exerciseInterval: 10,
+          restInterval: 5,
+          numberOfSets: 5,
+          recoveryInterval: 5,
+          numberOfCycles: 6,
+        },
+      ];
+      console.log(programs[programsSelect.value].exerciseInterval);
+
+      i = programs[programsSelect.value].initialCountdown;
+      arr = [
+        {
+          duration: programs[programsSelect.value].initialCountdown,
+          stage: "Get ready!",
+          color: "white",
+          sets: 0,
+          cycles: 0,
+        },
+      ];
+      console.log(programs[programsSelect.value]);
+
+      //text
+      for (m = 0; m < programs[programsSelect.value].numberOfCycles; m++) {
+        let currentSet;
+        for (n = 0; n < programs[programsSelect.value].numberOfSets; n++) {
+          arr.push(
+            {
+              duration: programs[programsSelect.value].exerciseInterval,
+              stage: "Exercise!",
+              color: "#f10d0d",
+              sets: n + 1,
+              cycles: m + 1,
+            },
+            {
+              duration: programs[programsSelect.value].restInterval,
+              stage: "Rest!",
+              color: "#0fde0f",
+              sets: n + 1,
+              cycles: m + 1,
+            }
+          );
+          currentSet = n + 1;
+        }
+        arr.push({
+          duration: programs[programsSelect.value].recoveryInterval,
+          stage: "Recovery",
+          color: "blue",
+          sets: currentSet,
+          cycles: m + 1,
+        });
+      }
+      console.log(arr);
+    });
+  </script>
+</html>

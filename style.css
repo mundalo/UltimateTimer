@@ -1,0 +1,45 @@
+body {
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+
+#stage {
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  font-size: 40px;
+  margin: 100px 0 0 0;
+}
+
+#time {
+  font-size: 130px;
+  margin: 0;
+}
+
+.metaData > div {
+  display: inline-block;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  float: middle;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 70px 0px;
+}
+
+.navButton {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 40px;
+  color: white;
+  background-color: gray;
+  border-radius: 25px;
+  display: inline-block;
+  border: 2px solid white;
+}
+
+.navButton:disabled {
+  color: rgb(63, 62, 62);
+}
