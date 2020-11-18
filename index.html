@@ -45,6 +45,9 @@
       <button id="startButton" class="navButton">start</button>
       <button id="stopButton" class="navButton" disabled>stop</button>
       <button id="clearButton" class="navButton" disabled>clear</button>
+      <br />
+      <button id="backButton" class="navButton">Back</button>
+      <button id="forButton" class="navButton">Next</button>
     </div>
   </body>
   <script>
@@ -59,6 +62,8 @@
     const setsLabel = document.getElementById("sets");
     const cyclesLabel = document.getElementById("cycles");
     const totalTimeLabel = document.getElementById("totalTime");
+    const backwardsButton = document.getElementById("backButton");
+    const forwardsButton = document.getElementById("forButton");
 
     //audio
     const beepSound = new Audio(
@@ -117,16 +122,18 @@
         }
 
         //fix the other sounds
-        //fix sets and cycles 0 in front function
         //beginners guide to git
         //playing with git
+
+        let setAmount = arr[index].sets; //THIS IS NEW!!!!!!!!
+        let cycleAmount = arr[index].cycles;
 
         stageLabel.style.color = arr[index].color;
         timeLabel.style.color = arr[index].color;
 
         stageLabel.innerHTML = arr[index].stage;
-        setsLabel.innerHTML = arr[index].sets;
-        cyclesLabel.innerHTML = arr[index].cycles;
+        setsLabel.innerHTML = formatSetCycles(setAmount); //THIS IS NEW!!!!!!
+        cyclesLabel.innerHTML = formatSetCycles(cycleAmount);
         totalTimeLabel.innerHTML = formatTime(totalTime);
         totalTime--;
 
@@ -169,6 +176,15 @@
       return `${minutesStr}:${secStr}`;
     }
 
+    //function formats sets and cycles //THIS IS NEW!!!!!!!!!
+    function formatSetCycles(amount) {
+      let amountNumb = amount;
+      if (amount <= 9) {
+        amountNumb = `0${amount}`;
+      }
+      return `${amountNumb}`;
+    }
+
     //stop & clear button click
     startButton.addEventListener("click", click);
     stopButton.addEventListener("click", function () {
@@ -176,6 +192,12 @@
       clearInterval(interval);
     });
     clearButton.addEventListener("click", clear);
+    /*
+    backwardsButton.addEventListener("click", );
+    forwardsButton.addEventListener("click", );
+    */
+
+    //program select
     programsSelect.addEventListener("change", function (e) {
       clear();
       programs = [
