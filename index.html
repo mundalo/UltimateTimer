@@ -22,16 +22,18 @@
       <option value="11">Wall Quad Hip Flexor Stretch</option>
       <option value="12">Standing Leg Raise</option>
     </select>
-    <div>
-      <p>Total Sets:</p>
-      <p id="totalSets">0</p>
+    <div id="totalSetsAndCycles">
+      <div id="totalSetsDisplay">
+        <p>Total Sets</p>
+        <p id="totalSets">0</p>
+      </div>
+      <div id="totalCyclesDisplay">
+        <p>Total Cycles</p>
+        <p id="totalCycles">0</p>
+      </div>
     </div>
     <div>
-      <p>Total Cycles:</p>
-      <p id="totalCycles">0</p>
-    </div>
-    <div>
-      <p id="stage" class="stage">Select exercise</p>
+      <p id="stage">Select exercise</p>
     </div>
     <div>
       <p id="time">00:00</p>
@@ -78,12 +80,27 @@
     const totalSetsLabel = document.getElementById("totalSets");
     const totalCyclesLabel = document.getElementById("totalCycles");
 
+    //fix audio
+    //fix css
+
     //audio
     const beepSound = new Audio(
       "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/Beep-sound-effect.mp3"
     );
     const stageSwitchSound = new Audio(
       "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3"
+    );
+    const stageSoundGetReady = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3"
+    );
+    const stageSoundExercise = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3"
+    );
+    const stageSoundRest = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3"
+    );
+    const stageSoundRecovery = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3"
     );
 
     //programs
@@ -252,11 +269,17 @@
 
         //stage sound
         switch (arr[index].stage) {
-          case "Exercise!":
-            //audio play
+          case "Get ready!":
+            stageSoundGetReady.play();
             break;
-          case "":
-            //audio play
+          case "Exercise!":
+            stageSoundExercise.play();
+            break;
+          case "Rest!":
+            stageSoundRest.play();
+            break;
+          case "Recovery":
+            stageSoundRecovery.play();
             break;
         }
 
