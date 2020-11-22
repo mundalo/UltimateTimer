@@ -2,6 +2,7 @@
 
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -29,15 +30,15 @@
     </div>
     <div class="metaData">
       <div>
-        <p>sets</p>
+        <p>Sets</p>
         <p id="sets">00</p>
       </div>
       <div>
-        <p>cycles</p>
+        <p>Cycles</p>
         <p id="cycles">00</p>
       </div>
       <div>
-        <p>total time</p>
+        <p>Total time</p>
         <p id="totalTime">00:00</p>
       </div>
     </div>
@@ -200,9 +201,9 @@
     //program select
     programsSelect.addEventListener("change", function (e) {
       clear();
-      programs = [
+    const programs = [
         {
-          //Select ecercise
+          //Select exercise
           initialCountdown: 0,
           exerciseInterval: 0,
           restInterval: 0,
@@ -319,6 +320,125 @@
           numberOfCycles: 6,
         },
       ];
+
+    //audio
+    const beepSound = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/Beep-sound-effect.mp3"
+    );
+
+    //Exercise times
+    let index = 0;
+    let setNumber = 1;
+    let cycleNumber = 1;
+
+    let i = 0;
+
+    //TotalTime calculator
+    function calculateTotalTime(exercises) {
+      let total = 0;
+      for (let i = 0; i < exercises.length; i++) {
+        total = total + exercises[i].duration;
+      }
+      return total;
+    }
+
+    //start button click
+    function click(e) {
+      stopButton.disabled = false;
+      clearButton.disabled = false;
+      startButton.disabled = true;
+      let totalTime = calculateTotalTime(arr);
+      clearInterval(interval);
+      interval = setInterval(function () {
+        if (!arr || arr.length === 0) {
+          //when you have select exercise in drop down - nothing in it
+          clear(); //default exercise
+
+          return;
+        }
+
+        i--;
+
+        if (i === 0) {
+          console.log(i);
+          index++;
+          if (index === arr.length) {
+            clear();
+
+            return;
+          }
+
+          i = (arr[index] || {}).duration;
+          console.log(index);
+        }
+
+        //audio
+        if (i <= 3) {
+          beepSound.play();
+        }
+
+        //fix the other sounds
+        //fix sets and cycles 0 in front function
+        //beginners guide to git
+        //playing with git
+
+        stageLabel.style.color = arr[index].color;
+        timeLabel.style.color = arr[index].color;
+
+        stageLabel.innerHTML = arr[index].stage;
+        setsLabel.innerHTML = `${arr[index].sets}/${programs[programsSelect.value].numberOfSets}`;
+        cyclesLabel.innerHTML = `${arr[index].cycles}/${programs[programsSelect.value].numberOfCycles}`;
+        totalTimeLabel.innerHTML = formatTime(totalTime);
+        totalTime--;
+
+        timeLabel.innerHTML = formatTime(i);
+      }, 1000);
+    }
+
+    //reset function
+    function clear() {
+      startButton.disabled = false;
+      clearInterval(interval);
+      i = programs[programsSelect.value].initialCountdown;
+      index = 0;
+
+      timeLabel.style.color = "white";
+      stageLabel.style.color = "white";
+
+      timeLabel.innerHTML = "00:00";
+      stageLabel.innerHTML = "Select exercise";
+      setsLabel.innerHTML = "00";
+      cyclesLabel.innerHTML = "00";
+      totalTimeLabel.innerHTML = "00:00";
+    }
+
+    //function formats time
+    function formatTime(time) {
+      const sec = time % 60;
+      const minutes = Math.floor(time / 60);
+      let secStr = sec;
+      let minutesStr = minutes;
+
+      if (sec <= 9) {
+        secStr = `0${sec}`;
+      }
+
+      if (minutes <= 9) {
+        minutesStr = `0${minutes}`;
+      }
+
+      return `${minutesStr}:${secStr}`;
+    }
+
+    //stop & clear button click
+    startButton.addEventListener("click", click);
+    stopButton.addEventListener("click", function () {
+      startButton.disabled = false;
+      clearInterval(interval);
+    });
+    clearButton.addEventListener("click", clear);
+    programsSelect.addEventListener("change", function (e) {
+      clear();
       console.log(programs[programsSelect.value].exerciseInterval);
 
       i = programs[programsSelect.value].initialCountdown;
@@ -366,4 +486,5 @@
       console.log(arr);
     });
   </script>
+  <script src="./wakeLock.js"></script>
 </html>
