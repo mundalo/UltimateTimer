@@ -29,12 +29,11 @@ body {
 .navbar {
   overflow: hidden;
   background-color: #333;
-  position: fixed;
-  left: 0;
-  right: 0;
+  float: middle;
+  position: flex;
   bottom: 0;
   width: 100%;
-  padding: 70px 0px;
+  padding: 30px 0px;
 }
 
 .navButton {
