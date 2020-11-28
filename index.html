@@ -40,16 +40,16 @@
     </div>
     <div class="metaData">
       <div>
-        <p>Sets</p>
-        <p id="sets">00</p>
+        <p class="titleSetCycleTotalTime">Sets</p>
+        <p id="sets" class="titleTime">00</p>
       </div>
       <div>
-        <p>Cycles</p>
-        <p id="cycles">00</p>
+        <p class="titleSetCycleTotalTime">Cycles</p>
+        <p id="cycles" class="titleTime">00</p>
       </div>
       <div>
-        <p>Total time</p>
-        <p id="totalTime">00:00</p>
+        <p class="titleSetCycleTotalTime">Total time</p>
+        <p id="totalTime" class="titleTime">00:00</p>
       </div>
     </div>
     <div class="navbar">
@@ -266,9 +266,8 @@
         ) {
           beepSound.play();
         }
-
+        /* repeats every 2 second...
         //stage sound
-        /* It keeps repeating the audio every 2 seconds
         switch (arr[index].stage) {
           case "Get ready!":
             stageSoundGetReady.play();
@@ -283,7 +282,7 @@
             stageSoundRecovery.play();
             break;
         }
-        */
+*/
 
         //Labels
         let setAmount = arr[index].sets;
@@ -417,14 +416,14 @@
             {
               duration: programs[programsSelect.value].exerciseInterval,
               stage: "Exercise!",
-              color: "#f10d0d",
+              color: "#ff2f00",
               sets: n + 1,
               cycles: m + 1,
             },
             {
               duration: programs[programsSelect.value].restInterval,
               stage: "Rest!",
-              color: "#0fde0f",
+              color: "#07ff07",
               sets: n + 1,
               cycles: m + 1,
             }
@@ -434,7 +433,7 @@
         arr.push({
           duration: programs[programsSelect.value].recoveryInterval,
           stage: "Recovery",
-          color: "blue",
+          color: "#356aff",
           sets: currentSet,
           cycles: m + 1,
         });
