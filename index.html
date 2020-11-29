@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/04e966dfa0.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <select name="programs" id="programs">
@@ -53,16 +56,40 @@
       </div>
     </div>
     <div class="navbar">
-      <button id="startButton" class="navButton">start</button>
-      <button id="stopButton" class="navButton" disabled>stop</button>
-      <button id="clearButton" class="navButton" disabled>clear</button>
       <div>
-        <button id="backButton" class="navButton">Back</button>
-        <button id="forButton" class="navButton">Next</button>
+        <button id="startButton" class="navButton">
+          <i class="fas fa-play"></i>
+        </button>
+        <button id="stopButton" class="navButton" disabled>
+          <i class="fas fa-pause"></i>
+        </button>
+      </div>
+      <div class="middleButton">
+        <button id="backButton" class="navButton">
+          <i class="fas fa-backward"></i>
+        </button>
+        <button id="forButton" class="navButton">
+          <i class="fas fa-forward"></i>
+        </button>
+      </div>
+      <div>
+        <button id="clearButton" class="navButton" disabled>
+          <i class="fas fa-undo"></i>
+        </button>
       </div>
     </div>
   </body>
   <script>
+    //what needs to be fixed
+    /*
+    css not have rest etc go into boxes on phone
+
+    javascript - costumizable button - set own sets, reps etc...
+    javascript - refactoring
+
+    sound doesnt work on my phone
+    */
+
     //Buttons
     const startButton = document.getElementById("startButton");
     let interval;
@@ -80,12 +107,9 @@
     const totalSetsLabel = document.getElementById("totalSets");
     const totalCyclesLabel = document.getElementById("totalCycles");
 
-    //fix audio
-    //fix css
-
     //audio
     const beepSound = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/Beep-sound-effect.mp3"
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3"
     );
     const stageSwitchSound = new Audio(
       "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3"
@@ -224,6 +248,8 @@
       },
     ];
 
+    clear();
+
     //TotalTime calculator
     function calculateTotalTime(exercises, stage = 0) {
       let total = 0;
@@ -235,6 +261,12 @@
 
     //startTimer
     function startTimer() {
+      startButton.style.display = "none";
+      stopButton.style.display = "inline-block";
+      clearButton.style.display = "inline-block";
+      backwardsButton.style.display = "inline-block";
+      forwardsButton.style.display = "inline-block";
+
       interval = setInterval(function () {
         if (!arr || arr.length === 0) {
           //when you have select exercise in drop down - nothing in it
@@ -243,13 +275,29 @@
           return;
         }
 
+        if (index === 0 && i === arr[index].duration) {
+          stageSoundGetReady.play();
+          stageSwitchSound.play();
+        }
+
         i--;
 
-        if (i === 0) {
+        if (i <= 0) {
           console.log(i);
           index++;
           stageSwitchSound.play();
-          if (index === arr.length) {
+          switch (arr[index].stage) {
+            case "Exercise!":
+              stageSoundExercise.play();
+              break;
+            case "Rest!":
+              stageSoundRest.play();
+              break;
+            case "Recovery":
+              stageSoundRecovery.play();
+              break;
+          }
+          if (index === arr.length - 1) {
             clear();
 
             return;
@@ -264,25 +312,11 @@
           (i <= 3 && arr[index].duration > 3) ||
           (arr[index].duration <= 3 && i <= arr[index].duration - 1)
         ) {
+          console.log("bip", beepSound.duration);
+          beepSound.pause();
+          beepSound.currentTime = 0;
           beepSound.play();
         }
-        /* repeats every 2 second...
-        //stage sound
-        switch (arr[index].stage) {
-          case "Get ready!":
-            stageSoundGetReady.play();
-            break;
-          case "Exercise!":
-            stageSoundExercise.play();
-            break;
-          case "Rest!":
-            stageSoundRest.play();
-            break;
-          case "Recovery":
-            stageSoundRecovery.play();
-            break;
-        }
-*/
 
         //Labels
         let setAmount = arr[index].sets;
@@ -326,6 +360,12 @@
       clearInterval(interval);
       i = programs[programsSelect.value].initialCountdown;
       index = 0;
+
+      startButton.style.display = "inline-block";
+      stopButton.style.display = "none";
+      clearButton.style.display = "none";
+      backwardsButton.style.display = "none";
+      forwardsButton.style.display = "none";
 
       timeLabel.style.color = "white";
       stageLabel.style.color = "white";
@@ -374,7 +414,7 @@
     forwardsButton.addEventListener("click", function () {
       clearInterval(interval);
       i = 1;
-      totalTime = calculateTotalTime(arr, index);
+      totalTime = calculateTotalTime(arr, index + 1);
       startTimer();
     });
     backwardsButton.addEventListener("click", function () {

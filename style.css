@@ -3,6 +3,7 @@ body {
   background-color: black;
   color: white;
   text-align: center;
+  margin: 0;
 }
 
 #stage {
@@ -56,21 +57,30 @@ body {
 .navbar {
   overflow: hidden;
   background-color: #333;
-  float: middle;
-  position: flex;
   bottom: 0;
   width: 100%;
-  padding: 30px 0px;
+  display: flex;
+  position: absolute;
+  padding: 30px 0;
+}
+
+.navbar i {
+  font-size: 50px;
+}
+
+.middleButton {
+  flex: 1;
 }
 
 .navButton {
   font-family: "Courier New", Courier, monospace;
-  font-size: 30px;
   color: white;
-  background-color: gray;
-  border-radius: 25px;
+  background-color: black;
+  border-radius: 50%;
   display: inline-block;
   border: 2px solid white;
+  padding: 15px;
+  text-align: center;
 }
 
 .navButton:disabled {
