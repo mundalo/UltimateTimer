@@ -6,33 +6,13 @@ body {
   margin: 0;
 }
 
-#stage {
-  font-family: "Courier New", Courier, monospace;
-  color: white;
-  font-size: 40px;
-  margin: 0;
-}
-
-.topTitle {
-  margin-top: 70px;
-}
-
-#time {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 130px;
-  margin: 0;
-  font-weight: bold;
-}
-
-#totalTime {
-  font-weight: bold;
-  font-size: 60px;
-}
-
+/*TOP OF PAGE*/
+/*Programs*/
 #programs {
   margin: 0 auto;
 }
 
+/*Total amount of sets and cycles*/
 #totalSetsAndCycles {
   font-size: 13px;
 }
@@ -51,6 +31,33 @@ body {
   border: 3px solid white;
 }
 
+/*MIDDLE OF PAGE*/
+/*"Select exercise" styling*/
+#stage {
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  font-size: 40px;
+  margin: 0;
+}
+
+.topTitle {
+  margin-top: 70px;
+}
+
+/*Timer countdown*/
+#time {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 130px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/*Set/cycle counter & full time of workout*/
+#totalTime {
+  font-weight: bold;
+  font-size: 60px;
+}
+
 .titleSetCycleTotalTime {
   font-size: 20px;
 }
@@ -64,6 +71,8 @@ body {
   margin: 0 10px;
 }
 
+/*BOTTOM OF PAGE*/
+/*Start, stop buttons etc...*/
 .navbar {
   overflow: hidden;
   background-color: #333;
