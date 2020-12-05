@@ -82,6 +82,8 @@
   <script>
     //what needs to be fixed
     /*
+
+    if you press stop button you cant press the start button - is fixed!
     javascript - costumizable button - set own sets, reps etc...
     javascript - refactoring
 
@@ -406,6 +408,8 @@
     startButton.addEventListener("click", click);
     stopButton.addEventListener("click", function () {
       startButton.disabled = false;
+      startButton.style.display = "inline-block";
+      stopButton.style.display = "none";
       clearInterval(interval);
     });
 
@@ -471,7 +475,7 @@
         arr.push({
           duration: programs[programsSelect.value].recoveryInterval,
           stage: "Recovery",
-          color: "#356aff",
+          color: "#0099ff",
           sets: currentSet,
           cycles: m + 1,
         });
