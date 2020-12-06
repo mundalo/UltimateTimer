@@ -76,19 +76,72 @@
         <button id="clearButton" class="navButton" disabled>
           <i class="fas fa-undo"></i>
         </button>
+        <button id="settingsButton" class="navButton">
+          <i class="fas fa-cog"></i>
+        </button>
+      </div>
+    </div>
+    <!--changing shit from below this line-->
+    <div>
+      <div>
+        <p>Settings</p>
+      </div>
+      <div class="settingOptions">
+        <p id="initialCountdownEdit">Initial Countdown</p>
+        <p id="exerciseIntervalEdit">Exercise Interval</p>
+        <p id="restIntervalEdit">Rest Interval</p>
+        <p id="numberOfSetsEdit">Number Of Sets</p>
+        <p id="recoveryIntervalEdit">Recovery Interval</p>
+        <p id="numberOfCyclesEdit">Number Of Cycles</p>
+      </div>
+    </div>
+    <div>
+      <div>
+        <select name="chooseSeconds" id="chooseSeconds" disabled>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
+      </div>
+      <div>
+        <select name="chooseMinutes" id="chooseMinutes" disabled>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+        </select>
       </div>
     </div>
   </body>
   <script>
     //what needs to be fixed
     /*
+        titleSetCycleTotalTimeLabel does not dissapear!
+        if you press stop button you cant press the start button - is fixed!
+        javascript - costumizable button - set own sets, reps etc...
+        javascript - refactoring
 
-    if you press stop button you cant press the start button - is fixed!
-    javascript - costumizable button - set own sets, reps etc...
-    javascript - refactoring
-
-    sound doesnt work on my phone
-    */
+        sound doesnt work on my phone
+        */
 
     //Buttons
     const startButton = document.getElementById("startButton");
@@ -96,16 +149,40 @@
     let totalTime = 0;
     const stopButton = document.getElementById("stopButton");
     const clearButton = document.getElementById("clearButton");
+    const backwardsButton = document.getElementById("backButton");
+    const forwardsButton = document.getElementById("forButton");
+    const settingsButton = document.getElementById("settingsButton");
+
     const timeLabel = document.getElementById("time");
     const stageLabel = document.getElementById("stage");
     const programsSelect = document.getElementById("programs");
     const setsLabel = document.getElementById("sets");
     const cyclesLabel = document.getElementById("cycles");
     const totalTimeLabel = document.getElementById("totalTime");
-    const backwardsButton = document.getElementById("backButton");
-    const forwardsButton = document.getElementById("forButton");
     const totalSetsLabel = document.getElementById("totalSets");
     const totalCyclesLabel = document.getElementById("totalCycles");
+    const totalSetsAndCyclesLabel = document.getElementById(
+      "totalSetsAndCycles"
+    );
+    const titleSetCycleTotalTimeLabel = document.getElementById(
+      "titleSetCycleTotalTime"
+    );
+
+    const initialCountdownEdit = document.getElementById(
+      "initialCountdownEdit"
+    );
+    const exerciseIntervalEdit = document.getElementById(
+      "exerciseIntervalEdit"
+    );
+    const restIntervalEdit = document.getElementById("restIntervalEdit");
+    const numberOfSetsEdit = document.getElementById("numberOfSetsEdit");
+    const recoveryIntervalEdit = document.getElementById(
+      "recoveryIntervalEdit"
+    );
+    const numberOfCyclesEdit = document.getElementById("numberOfCyclesEdit");
+
+    const secondsSelect = document.getElementById("chooseSeconds");
+    const minutesSelect = document.getElementById("chooseMinutes");
 
     //audio
     const beepSound = new Audio(
@@ -249,7 +326,10 @@
     ];
 
     clear();
-
+    /*
+    const secondsSelect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    const minutesSelect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+*/
     //TotalTime calculator
     function calculateTotalTime(exercises, stage = 0) {
       let total = 0;
@@ -262,6 +342,7 @@
     //startTimer
     function startTimer() {
       startButton.style.display = "none";
+      settingsButton.style.display = "none";
       stopButton.style.display = "inline-block";
       clearButton.style.display = "inline-block";
       backwardsButton.style.display = "inline-block";
@@ -362,6 +443,7 @@
       index = 0;
 
       startButton.style.display = "inline-block";
+      settingsButton.style.display = "inline-block";
       stopButton.style.display = "none";
       clearButton.style.display = "none";
       backwardsButton.style.display = "none";
@@ -403,12 +485,41 @@
       }
       return `${amountNumb}`;
     }
+    /*
+        //Choose time by initial buttons
+        function initialCountdownButton() {
+          secondsSelect.style.display = "inline-block";
+          minutesSelect.style.display = "inline-block";
+
+          initialCountdownEdit.style.display = "none";
+          exerciseIntervalEdit.style.display = "none";
+          restIntervalEdit.style.display = "none";
+          numberOfSetsEdit.style.display = "none";
+          recoveryIntervalEdit.style.display = "none";
+          numberOfCyclesEdit.style.display = "none";
+          
+          secondsSelect;
+          minutesSelect;
+
+          return newTime;
+        }*/
+
+    /*
+          initialCountdownEdit;
+          exerciseIntervalEdit;
+          restIntervalEdit;
+          numberOfSetsEdit;
+          recoveryIntervalEdit;
+          numberOfCyclesEdit;
+          secondsSelect;
+          minutesSelect;*/
 
     //stop & clear button click
     startButton.addEventListener("click", click);
     stopButton.addEventListener("click", function () {
       startButton.disabled = false;
       startButton.style.display = "inline-block";
+      settingsButton.style.display = "inline-block";
       stopButton.style.display = "none";
       clearInterval(interval);
     });
@@ -427,6 +538,35 @@
       startTimer();
     });
 
+    //working on this
+    settingsButton.addEventListener("click", function (e) {
+      clear();
+      startButton.style.display = "none";
+      stopButton.style.display = "none";
+      clearButton.style.display = "none";
+      backwardsButton.style.display = "none";
+      forwardsButton.style.display = "none";
+      settingsButton.style.display = "none";
+      timeLabel.style.display = "none";
+      stageLabel.style.display = "none";
+      programsSelect.style.display = "none";
+      setsLabel.style.display = "none";
+      cyclesLabel.style.display = "none";
+      totalTimeLabel.style.display = "none";
+      totalSetsLabel.style.display = "none";
+      totalCyclesLabel.style.display = "none";
+      secondsSelect.style.display = "none";
+      minutesSelect.style.display = "none";
+      totalSetsAndCyclesLabel.style.display = "none";
+      titleSetCycleTotalTimeLabel.style.display = "none";
+    });
+    initialCountdownEdit.addEventListener("click", initialCountdownButton);
+    /*exerciseIntervalEdit.addEventListener("click");
+    restIntervalEdit.addEventListener("click");
+    numberOfSetsEdit.addEventListener("click");
+    recoveryIntervalEdit.addEventListener("click");
+    numberOfCyclesEdit.addEventListener("click");
+*/
     clearButton.addEventListener("click", clear);
     programsSelect.addEventListener("change", function (e) {
       clear();
