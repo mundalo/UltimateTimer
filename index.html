@@ -108,9 +108,6 @@
   <script>
     //what needs to be fixed
     /*
-        titleSetCycleTotalTimeLabel does not dissapear!
-        
-        javascript - costumizable button - set own sets, reps etc...
         javascript - refactoring
 
         sound doesnt work on my phone
@@ -512,10 +509,44 @@
         recoveryInterval: recoveryIntervalInput.value || 1,
         numberOfCycles: numberOfCyclesInput.value || 1,
       });
+
+      programsSelect.value = programsSelect.options.length - 1;
+      programSelectChange();
+    });
+
+    exerciseIntervalInput.addEventListener("keypress", function (e) {
+      if (e.which == 13) {
+        restIntervalInput.focus();
+      }
+    });
+
+    restIntervalInput.addEventListener("keypress", function (e) {
+      if (e.which == 13) {
+        numberOfSetsInput.focus();
+      }
+    });
+
+    numberOfSetsInput.addEventListener("keypress", function (e) {
+      if (e.which == 13) {
+        recoveryIntervalInput.focus();
+      }
+    });
+
+    recoveryIntervalInput.addEventListener("keypress", function (e) {
+      if (e.which == 13) {
+        numberOfCyclesInput.focus();
+      }
+    });
+
+    numberOfCyclesInput.addEventListener("keypress", function (e) {
+      if (e.which == 13) {
+        settingsSubmitButton.click();
+      }
     });
 
     clearButton.addEventListener("click", clear);
-    programsSelect.addEventListener("change", function (e) {
+
+    function programSelectChange() {
       clear();
       //Exercise times
       let index = -1;
@@ -568,7 +599,9 @@
         });
       }
       console.log(arr);
-    });
+    }
+
+    programsSelect.addEventListener("change", programSelectChange);
   </script>
   <script src="./wakeLock.js"></script>
 </html>
