@@ -262,7 +262,7 @@
         //Horse Stance
         initialCountdown: 7,
         exerciseInterval: 30,
-        restInterval: 20,
+        restInterval: 15,
         numberOfSets: 5,
         recoveryInterval: 30,
         numberOfCycles: 3,
@@ -506,9 +506,9 @@
       totalTime = calculateTotalTime(arr, index + 1);
       startTimer();
     });
+    clearButton.addEventListener("click", clear);
 
-    //working on this
-
+    //Setting buttons
     settingsButton.addEventListener("click", function (e) {
       mainTimer.style.display = "none";
       timerBlock.style.display = "block";
@@ -576,8 +576,7 @@
       }
     });
 
-    clearButton.addEventListener("click", clear);
-
+    //Program select
     function programSelectChange() {
       clear();
       //Exercise times
