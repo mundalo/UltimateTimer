@@ -26,16 +26,6 @@
         <option value="11">Wall Quad Hip Flexor Stretch</option>
         <option value="12">Standing Leg Raise</option>
       </select>
-      <div id="totalSetsAndCycles">
-        <div id="totalSetsDisplay">
-          <p>Total Sets</p>
-          <p id="totalSets">0</p>
-        </div>
-        <div id="totalCyclesDisplay">
-          <p>Total Cycles</p>
-          <p id="totalCycles">0</p>
-        </div>
-      </div>
       <div class="topTitle">
         <p id="stage">Select exercise</p>
       </div>
@@ -110,7 +100,6 @@
     /*
         javascript - refactoring
 
-        sound doesnt work on my phone
         */
 
     //Buttons
@@ -135,8 +124,6 @@
     const setsLabel = document.getElementById("sets");
     const cyclesLabel = document.getElementById("cycles");
     const totalTimeLabel = document.getElementById("totalTime");
-    const totalSetsLabel = document.getElementById("totalSets");
-    const totalCyclesLabel = document.getElementById("totalCycles");
     const totalSetsAndCyclesLabel = document.getElementById(
       "totalSetsAndCycles"
     );
@@ -377,13 +364,6 @@
 
         setsLabel.innerHTML = `${formatSetCycles(arr[index].sets)}`;
         cyclesLabel.innerHTML = `${formatSetCycles(arr[index].cycles)}`;
-
-        totalSetsLabel.innerHTML = `${
-          programs[programsSelect.value].numberOfSets
-        }`;
-        totalCyclesLabel.innerHTML = `${
-          programs[programsSelect.value].numberOfCycles
-        }`;
 
         totalTimeLabel.innerHTML = formatTime(totalTime);
         totalTime--;
