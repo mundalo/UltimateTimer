@@ -73,7 +73,7 @@
         </div>
       </div>
     </div>
-    <!--changing shit from below this line-->
+    <!--Settings-->
     <div id="timerBlock">
       <div>
         <p>Settings</p>
@@ -120,6 +120,8 @@
     //what needs to be fixed
     /*
         javascript - refactoring
+
+        sounds on phone not quite good yet
 
         */
 
@@ -486,7 +488,7 @@
     stopButton.addEventListener("click", function () {
       startButton.disabled = false;
       startButton.style.display = "inline-block";
-      settingsButton.style.display = "inline-block";
+      settingsButton.style.display = "none";
       stopButton.style.display = "none";
       clearInterval(interval);
     });
@@ -634,4 +636,5 @@
     programsSelect.addEventListener("change", programSelectChange);
   </script>
   <script src="./wakeLock.js"></script>
+  <script src="./lowlag.js"></script>
 </html>

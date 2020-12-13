@@ -40,10 +40,12 @@ body {
 #totalTime {
   font-weight: bold;
   font-size: 60px;
+  margin: 0;
 }
 
 .titleSetCycleTotalTime {
   font-size: 20px;
+  margin: 0;
 }
 
 .titleTime {
