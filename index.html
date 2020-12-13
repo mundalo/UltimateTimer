@@ -80,19 +80,40 @@
       </div>
       <div class="settingOptions">
         <p>
-          Exercise Interval: <input type="tel" id="exerciseIntervalInput" />
+          Exercise Interval:
+          <input
+            type="tel"
+            id="exerciseIntervalInput"
+            onfocus="this.select();"
+          />
         </p>
-        <p>Rest Interval: <input type="tel" id="restIntervalInput" /></p>
-        <p>Number Of Sets: <input type="tel" id="numberOfSetsInput" /></p>
         <p>
-          Recovery Interval: <input type="tel" id="recoveryIntervalInput" />
+          Rest Interval:
+          <input type="tel" id="restIntervalInput" onfocus="this.select();" />
         </p>
-        <p>Number Of Cycles: <input type="tel" id="numberOfCyclesInput" /></p>
+        <p>
+          Number Of Sets:
+          <input type="tel" id="numberOfSetsInput" onfocus="this.select();" />
+        </p>
+        <p>
+          Recovery Interval:
+          <input
+            type="tel"
+            id="recoveryIntervalInput"
+            onfocus="this.select();"
+          />
+        </p>
+        <p>
+          Number Of Cycles:
+          <input type="tel" id="numberOfCyclesInput" onfocus="this.select();" />
+        </p>
       </div>
       <button id="settingsBackButton" class="navButton">
-        <i class="fas fa-undo"></i>
+        <i class="fas fa-arrow-left"></i>
       </button>
-      <button id="settingsSubmitButton" class="navButton">submit</button>
+      <button id="settingsSubmitButton" class="navButton">
+        <i class="fas fa-check"></i>
+      </button>
     </div>
   </body>
   <script>
@@ -489,6 +510,8 @@
     settingsButton.addEventListener("click", function (e) {
       mainTimer.style.display = "none";
       timerBlock.style.display = "block";
+
+      exerciseIntervalInput.focus();
     });
 
     settingsBackButton.addEventListener("click", function (e) {
@@ -510,11 +533,11 @@
       programs.push({
         //New Exercise
         initialCountdown: 7,
-        exerciseInterval: exerciseIntervalInput.value || 1,
-        restInterval: restIntervalInput.value || 1,
-        numberOfSets: numberOfSetsInput.value || 1,
-        recoveryInterval: recoveryIntervalInput.value || 1,
-        numberOfCycles: numberOfCyclesInput.value || 1,
+        exerciseInterval: parseInt(exerciseIntervalInput.value) || 1,
+        restInterval: parseInt(restIntervalInput.value) || 1,
+        numberOfSets: parseInt(numberOfSetsInput.value) || 1,
+        recoveryInterval: parseInt(recoveryIntervalInput.value) || 1,
+        numberOfCycles: parseInt(numberOfCyclesInput.value) || 1,
       });
 
       programsSelect.value = programsSelect.options.length - 1;
