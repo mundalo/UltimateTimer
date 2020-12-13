@@ -9,134 +9,107 @@
     ></script>
   </head>
   <body>
-    <select name="programs" id="programs">
-      <!--default option-->
-      <option value="0">Select exercise</option>
-      <option value="1">Sitting Pike Stretch</option>
-      <option value="2">Sitting Leg Raise</option>
-      <option value="3">Wall V-Sit</option>
-      <option value="4">Weighted Jefferson Curl</option>
-      <option value="5">Weight. St. Shoulder Extension</option>
-      <option value="6">Lying Weigthed Stick Lift</option>
-      <option value="7">Pre Side Split</option>
-      <option value="8">Horse Stance</option>
-      <option value="9">Standing Side Leg Raise</option>
-      <option value="10">Pre Front Split</option>
-      <option value="11">Wall Quad Hip Flexor Stretch</option>
-      <option value="12">Standing Leg Raise</option>
-    </select>
-    <div id="totalSetsAndCycles">
-      <div id="totalSetsDisplay">
-        <p>Total Sets</p>
-        <p id="totalSets">0</p>
+    <div id="mainTimer">
+      <select name="programs" id="programs">
+        <!--default option-->
+        <option value="0">Select exercise</option>
+        <option value="1">Sitting Pike Stretch</option>
+        <option value="2">Sitting Leg Raise</option>
+        <option value="3">Wall V-Sit</option>
+        <option value="4">Weighted Jefferson Curl</option>
+        <option value="5">Weight. St. Shoulder Extension</option>
+        <option value="6">Lying Weigthed Stick Lift</option>
+        <option value="7">Pre Side Split</option>
+        <option value="8">Horse Stance</option>
+        <option value="9">Standing Side Leg Raise</option>
+        <option value="10">Pre Front Split</option>
+        <option value="11">Wall Quad Hip Flexor Stretch</option>
+        <option value="12">Standing Leg Raise</option>
+      </select>
+      <div id="totalSetsAndCycles">
+        <div id="totalSetsDisplay">
+          <p>Total Sets</p>
+          <p id="totalSets">0</p>
+        </div>
+        <div id="totalCyclesDisplay">
+          <p>Total Cycles</p>
+          <p id="totalCycles">0</p>
+        </div>
       </div>
-      <div id="totalCyclesDisplay">
-        <p>Total Cycles</p>
-        <p id="totalCycles">0</p>
-      </div>
-    </div>
-    <div class="topTitle">
-      <p id="stage">Select exercise</p>
-    </div>
-    <div>
-      <p id="time">00:00</p>
-    </div>
-    <div class="metaData">
-      <div>
-        <p class="titleSetCycleTotalTime">Sets</p>
-        <p id="sets" class="titleTime">00</p>
+      <div class="topTitle">
+        <p id="stage">Select exercise</p>
       </div>
       <div>
-        <p class="titleSetCycleTotalTime">Cycles</p>
-        <p id="cycles" class="titleTime">00</p>
+        <p id="time">00:00</p>
       </div>
-      <div>
-        <p class="titleSetCycleTotalTime">Total time</p>
-        <p id="totalTime" class="titleTime">00:00</p>
+      <div class="metaData">
+        <div>
+          <p class="titleSetCycleTotalTime">Sets</p>
+          <p id="sets" class="titleTime">00</p>
+        </div>
+        <div>
+          <p class="titleSetCycleTotalTime">Cycles</p>
+          <p id="cycles" class="titleTime">00</p>
+        </div>
+        <div>
+          <p class="titleSetCycleTotalTime">Total time</p>
+          <p id="totalTime" class="titleTime">00:00</p>
+        </div>
       </div>
-    </div>
-    <div class="navbar">
-      <div>
-        <button id="startButton" class="navButton">
-          <i class="fas fa-play"></i>
-        </button>
-        <button id="stopButton" class="navButton" disabled>
-          <i class="fas fa-pause"></i>
-        </button>
-      </div>
-      <div class="middleButton">
-        <button id="backButton" class="navButton">
-          <i class="fas fa-backward"></i>
-        </button>
-        <button id="forButton" class="navButton">
-          <i class="fas fa-forward"></i>
-        </button>
-      </div>
-      <div>
-        <button id="clearButton" class="navButton" disabled>
-          <i class="fas fa-undo"></i>
-        </button>
-        <button id="settingsButton" class="navButton">
-          <i class="fas fa-cog"></i>
-        </button>
+      <div class="navbar">
+        <div>
+          <button id="startButton" class="navButton">
+            <i class="fas fa-play"></i>
+          </button>
+          <button id="stopButton" class="navButton" disabled>
+            <i class="fas fa-pause"></i>
+          </button>
+        </div>
+        <div class="middleButton">
+          <button id="backButton" class="navButton">
+            <i class="fas fa-backward"></i>
+          </button>
+          <button id="forButton" class="navButton">
+            <i class="fas fa-forward"></i>
+          </button>
+        </div>
+        <div>
+          <button id="clearButton" class="navButton" disabled>
+            <i class="fas fa-undo"></i>
+          </button>
+          <button id="settingsButton" class="navButton">
+            <i class="fas fa-cog"></i>
+          </button>
+        </div>
       </div>
     </div>
     <!--changing shit from below this line-->
-    <div>
+    <div id="timerBlock">
       <div>
         <p>Settings</p>
       </div>
       <div class="settingOptions">
-        <p id="initialCountdownEdit">Initial Countdown</p>
-        <p id="exerciseIntervalEdit">Exercise Interval</p>
-        <p id="restIntervalEdit">Rest Interval</p>
-        <p id="numberOfSetsEdit">Number Of Sets</p>
-        <p id="recoveryIntervalEdit">Recovery Interval</p>
-        <p id="numberOfCyclesEdit">Number Of Cycles</p>
+        <p>
+          Exercise Interval: <input type="tel" id="exerciseIntervalInput" />
+        </p>
+        <p>Rest Interval: <input type="tel" id="restIntervalInput" /></p>
+        <p>Number Of Sets: <input type="tel" id="numberOfSetsInput" /></p>
+        <p>
+          Recovery Interval: <input type="tel" id="recoveryIntervalInput" />
+        </p>
+        <p>Number Of Cycles: <input type="tel" id="numberOfCyclesInput" /></p>
       </div>
-    </div>
-    <div>
-      <div>
-        <select name="chooseSeconds" id="chooseSeconds" disabled>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-        </select>
-      </div>
-      <div>
-        <select name="chooseMinutes" id="chooseMinutes" disabled>
-          <option value="0">0</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-        </select>
-      </div>
+      <button id="settingsBackButton" class="navButton">
+        <i class="fas fa-undo"></i>
+      </button>
+      <button id="settingsSubmitButton" class="navButton">submit</button>
     </div>
   </body>
   <script>
     //what needs to be fixed
     /*
         titleSetCycleTotalTimeLabel does not dissapear!
-        if you press stop button you cant press the start button - is fixed!
+        
         javascript - costumizable button - set own sets, reps etc...
         javascript - refactoring
 
@@ -152,6 +125,12 @@
     const backwardsButton = document.getElementById("backButton");
     const forwardsButton = document.getElementById("forButton");
     const settingsButton = document.getElementById("settingsButton");
+    const mainTimer = document.getElementById("mainTimer");
+    const timerBlock = document.getElementById("timerBlock");
+    const settingsBackButton = document.getElementById("settingsBackButton");
+    const settingsSubmitButton = document.getElementById(
+      "settingsSubmitButton"
+    );
 
     const timeLabel = document.getElementById("time");
     const stageLabel = document.getElementById("stage");
@@ -168,21 +147,15 @@
       "titleSetCycleTotalTime"
     );
 
-    const initialCountdownEdit = document.getElementById(
-      "initialCountdownEdit"
+    const exerciseIntervalInput = document.getElementById(
+      "exerciseIntervalInput"
     );
-    const exerciseIntervalEdit = document.getElementById(
-      "exerciseIntervalEdit"
+    const restIntervalInput = document.getElementById("restIntervalInput");
+    const numberOfSetsInput = document.getElementById("numberOfSetsInput");
+    const recoveryIntervalInput = document.getElementById(
+      "recoveryIntervalInput"
     );
-    const restIntervalEdit = document.getElementById("restIntervalEdit");
-    const numberOfSetsEdit = document.getElementById("numberOfSetsEdit");
-    const recoveryIntervalEdit = document.getElementById(
-      "recoveryIntervalEdit"
-    );
-    const numberOfCyclesEdit = document.getElementById("numberOfCyclesEdit");
-
-    const secondsSelect = document.getElementById("chooseSeconds");
-    const minutesSelect = document.getElementById("chooseMinutes");
+    const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
 
     //audio
     const beepSound = new Audio(
@@ -326,10 +299,7 @@
     ];
 
     clear();
-    /*
-    const secondsSelect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    const minutesSelect = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-*/
+
     //TotalTime calculator
     function calculateTotalTime(exercises, stage = 0) {
       let total = 0;
@@ -485,34 +455,6 @@
       }
       return `${amountNumb}`;
     }
-    /*
-        //Choose time by initial buttons
-        function initialCountdownButton() {
-          secondsSelect.style.display = "inline-block";
-          minutesSelect.style.display = "inline-block";
-
-          initialCountdownEdit.style.display = "none";
-          exerciseIntervalEdit.style.display = "none";
-          restIntervalEdit.style.display = "none";
-          numberOfSetsEdit.style.display = "none";
-          recoveryIntervalEdit.style.display = "none";
-          numberOfCyclesEdit.style.display = "none";
-          
-          secondsSelect;
-          minutesSelect;
-
-          return newTime;
-        }*/
-
-    /*
-          initialCountdownEdit;
-          exerciseIntervalEdit;
-          restIntervalEdit;
-          numberOfSetsEdit;
-          recoveryIntervalEdit;
-          numberOfCyclesEdit;
-          secondsSelect;
-          minutesSelect;*/
 
     //stop & clear button click
     startButton.addEventListener("click", click);
@@ -539,34 +481,39 @@
     });
 
     //working on this
+
     settingsButton.addEventListener("click", function (e) {
-      clear();
-      startButton.style.display = "none";
-      stopButton.style.display = "none";
-      clearButton.style.display = "none";
-      backwardsButton.style.display = "none";
-      forwardsButton.style.display = "none";
-      settingsButton.style.display = "none";
-      timeLabel.style.display = "none";
-      stageLabel.style.display = "none";
-      programsSelect.style.display = "none";
-      setsLabel.style.display = "none";
-      cyclesLabel.style.display = "none";
-      totalTimeLabel.style.display = "none";
-      totalSetsLabel.style.display = "none";
-      totalCyclesLabel.style.display = "none";
-      secondsSelect.style.display = "none";
-      minutesSelect.style.display = "none";
-      totalSetsAndCyclesLabel.style.display = "none";
-      titleSetCycleTotalTimeLabel.style.display = "none";
+      mainTimer.style.display = "none";
+      timerBlock.style.display = "block";
     });
-    initialCountdownEdit.addEventListener("click", initialCountdownButton);
-    /*exerciseIntervalEdit.addEventListener("click");
-    restIntervalEdit.addEventListener("click");
-    numberOfSetsEdit.addEventListener("click");
-    recoveryIntervalEdit.addEventListener("click");
-    numberOfCyclesEdit.addEventListener("click");
-*/
+
+    settingsBackButton.addEventListener("click", function (e) {
+      mainTimer.style.display = "block";
+      timerBlock.style.display = "none";
+    });
+
+    settingsSubmitButton.addEventListener("click", function (e) {
+      mainTimer.style.display = "block";
+      timerBlock.style.display = "none";
+
+      const option = document.createElement("option");
+      option.value = programsSelect.options.length;
+      option.text = `New Exercise: ${exerciseIntervalInput.value || 1}, ${
+        restIntervalInput.value || 1
+      }, ${numberOfSetsInput.value || 1}`;
+      programsSelect.appendChild(option);
+
+      programs.push({
+        //New Exercise
+        initialCountdown: 7,
+        exerciseInterval: exerciseIntervalInput.value || 1,
+        restInterval: restIntervalInput.value || 1,
+        numberOfSets: numberOfSetsInput.value || 1,
+        recoveryInterval: recoveryIntervalInput.value || 1,
+        numberOfCycles: numberOfCyclesInput.value || 1,
+      });
+    });
+
     clearButton.addEventListener("click", clear);
     programsSelect.addEventListener("change", function (e) {
       clear();
