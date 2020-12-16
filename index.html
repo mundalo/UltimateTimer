@@ -116,12 +116,14 @@
       </button>
     </div>
   </body>
+  <script src="./audioPlayer.js"></script>
   <script>
     //what needs to be fixed
     /*
         javascript - refactoring
         */
     //downloading sounds when loading the page
+
     var xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
@@ -220,6 +222,7 @@
     const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
 
     //audio
+
     const beepSound = new Audio(
       "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3"
     );
@@ -425,9 +428,10 @@
           (i <= 3 && arr[index].duration > 3) ||
           (arr[index].duration <= 3 && i <= arr[index].duration - 1)
         ) {
+          /* lucas have deleted this in his
           console.log("bip", beepSound.duration);
           beepSound.pause();
-          beepSound.currentTime = 0;
+          beepSound.currentTime = 0;*/
           beepSound.play();
         }
 
@@ -455,7 +459,7 @@
       stopButton.disabled = false;
       clearButton.disabled = false;
       startButton.disabled = true;
-
+      /*
       beepSound.src = "";
       beepSound.play();
       stageSwitchSound.src = "";
@@ -481,7 +485,7 @@
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3";
       stageSoundRecovery.src =
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3";
-
+*/
       totalTime = calculateTotalTime(arr);
       clearInterval(interval);
       startTimer();
@@ -689,6 +693,5 @@
 
     programsSelect.addEventListener("change", programSelectChange);
   </script>
-  <script src="./wakeLock.js"></script>
-  <script src="./lowlag.js"></script>
+  <scrip src="./wakeLock.js"></scrip>
 </html>
