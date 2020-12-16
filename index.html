@@ -123,7 +123,7 @@
         javascript - refactoring
         */
     //downloading sounds when loading the page
-    /*
+
     var xhr = new XMLHttpRequest();
     xhr.open(
       "GET",
@@ -177,7 +177,7 @@
     );
     xhr.responseType = "blob";
     xhr.send();
-*/
+
     //Main pages
     const mainTimer = document.getElementById("mainTimer");
     const timerBlock = document.getElementById("timerBlock");
@@ -428,10 +428,9 @@
           (i <= 3 && arr[index].duration > 3) ||
           (arr[index].duration <= 3 && i <= arr[index].duration - 1)
         ) {
-          /* lucas have deleted this in his
           console.log("bip", beepSound.duration);
           beepSound.pause();
-          beepSound.currentTime = 0;*/
+          beepSound.currentTime = 0;
           beepSound.play();
         }
 
