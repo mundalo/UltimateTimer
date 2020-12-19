@@ -1,4 +1,4 @@
-const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const sources = {};
 
 function audioPlayer(param) {
@@ -12,21 +12,15 @@ function audioPlayer(param) {
     request.responseType = 'arraybuffer';
 
 
-    request.onload = function() {
+    request.onload = function () {
       var audioData = request.response;
 
-      audioCtx.decodeAudioData(audioData, function(buffer) {
+      audioCtx.decodeAudioData(audioData, function (buffer) {
         sources[key] = buffer;
-          // sources[key].buffer = buffer;
-
-          // sources[key].connect(audioCtx.destination);
-          // sources[key].loop = false;
-        },
-
-        function(e) {
+      },
+        function (e) {
           console.log("Error with decoding audio data" + e.err);
         });
-
     }
 
     request.send();
@@ -41,3 +35,4 @@ function audioPlayer(param) {
     source.start(0)
   }
 }
+
