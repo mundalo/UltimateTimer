@@ -46,9 +46,11 @@
           <p id="totalTime" class="titleTime">00:00</p>
         </div>
       </div>
-      <div class="middleButton2">
+      <div class="checkboxDiv">
         <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
-        <label for="halfwayBeep"><i class="fas fa-stopwatch"></i></label>
+        <label class="checkbox" for="halfwayBeep"
+          ><i class="fas fa-stopwatch"></i><span class="checkmark"></span
+        ></label>
       </div>
       <!--Bottom line-->
       <div class="navbar">
@@ -80,11 +82,11 @@
     </div>
     <!--Settings-->
     <div id="timerBlock">
-      <div>
+      <div id="stage">
         <p>Settings</p>
       </div>
       <div class="settingOptions">
-        <p>
+        <p class="exerciseColor">
           Exercise Interval:
           <input
             type="tel"
@@ -92,15 +94,15 @@
             onfocus="this.select();"
           />
         </p>
-        <p>
+        <p class="restColor">
           Rest Interval:
           <input type="tel" id="restIntervalInput" onfocus="this.select();" />
         </p>
-        <p>
+        <p class="numberOfSetsColor">
           Number Of Sets:
           <input type="tel" id="numberOfSetsInput" onfocus="this.select();" />
         </p>
-        <p>
+        <p class="recoveryColor">
           Recovery Interval:
           <input
             type="tel"
@@ -108,17 +110,23 @@
             onfocus="this.select();"
           />
         </p>
-        <p>
+        <p class="numberOfCyclesColor">
           Number Of Cycles:
           <input type="tel" id="numberOfCyclesInput" onfocus="this.select();" />
         </p>
       </div>
-      <button id="settingsBackButton" class="navButton">
-        <i class="fas fa-arrow-left"></i>
-      </button>
-      <button id="settingsSubmitButton" class="navButton">
-        <i class="fas fa-check"></i>
-      </button>
+      <div class="navbar2">
+        <div>
+        <button id="settingsBackButton" class="navButton">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </div>
+      <div></div>
+        <button id="settingsSubmitButton" class="navButton">
+          <i class="fas fa-check"></i>
+        </button>
+      </div>
+      </div>
     </div>
   </body>
   <script src="./audioPlayer.js"></script>
@@ -128,6 +136,10 @@
         javascript - refactoring
 
         is it wrong that there is nothing in the halfwaybeepbutton function?
+
+        the whistle if you put it on horse stance is very low compared to on the rest? why?
+
+        make audio heigher in volume somehow? on phone it cant go that heigh
         */
 
     //downloading sounds when loading the page
@@ -471,7 +483,8 @@
         //halfwayBeep
         if (
           halfwayBeepButton.checked == true &&
-          i == Math.floor(arr[index].duration / 2)
+          i == Math.floor(arr[index].duration / 2) &&
+          arr[index].duration >= 8
         ) {
           refereeWhistle.play();
         }
@@ -499,7 +512,7 @@
     function click(e) {
       stopButton.disabled = false;
       clearButton.disabled = false;
-      startButton.disabled = true;
+      halfwayBeepButton.disabled = true;
 
       beepSound.src = "";
       beepSound.play();
@@ -538,6 +551,7 @@
     //reset function
     function clear() {
       startButton.disabled = false;
+      halfwayBeepButton.disabled = false;
       clearInterval(interval);
       i = programs[programsSelect.value].initialCountdown;
       index = 0;
@@ -590,6 +604,7 @@
     startButton.addEventListener("click", click);
     stopButton.addEventListener("click", function () {
       startButton.disabled = false;
+      halfwayBeepButton.disabled = false;
       startButton.style.display = "inline-block";
       settingsButton.style.display = "none";
       stopButton.style.display = "none";
