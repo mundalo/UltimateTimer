@@ -123,6 +123,61 @@
         javascript - refactoring
         */
 
+    //downloading sounds when loading the page
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
     //Main pages
     const mainTimer = document.getElementById("mainTimer");
     const timerBlock = document.getElementById("timerBlock");
@@ -188,9 +243,12 @@
     );
 
     const playAudio = audioPlayer({
-      beep: 'https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3',
-      stageSwitch: 'https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3',
-      stageSoundGetReady: "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
+      beep:
+        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3",
+      stageSwitch:
+        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3",
+      stageSoundGetReady:
+        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
       stageSoundExercise:
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3",
       stageSoundRest:
