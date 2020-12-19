@@ -46,6 +46,11 @@
           <p id="totalTime" class="titleTime">00:00</p>
         </div>
       </div>
+      <div class="middleButton2">
+        <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
+        <label for="halfwayBeep"><i class="fas fa-stopwatch"></i></label>
+      </div>
+      <!--Bottom line-->
       <div class="navbar">
         <div>
           <button id="startButton" class="navButton">
@@ -121,6 +126,8 @@
     //what needs to be fixed
     /*
         javascript - refactoring
+
+        is it wrong that there is nothing in the halfwaybeepbutton function?
         */
 
     //downloading sounds when loading the page
@@ -178,6 +185,15 @@
     xhr.responseType = "blob";
     xhr.send();
 
+    var xhr = new XMLHttpRequest();
+    xhr.open(
+      "GET",
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
+      true
+    );
+    xhr.responseType = "blob";
+    xhr.send();
+
     //Main pages
     const mainTimer = document.getElementById("mainTimer");
     const timerBlock = document.getElementById("timerBlock");
@@ -195,6 +211,7 @@
     const settingsSubmitButton = document.getElementById(
       "settingsSubmitButton"
     );
+    var halfwayBeepButton = document.getElementById("halfwayBeep");
 
     //Labels
     const timeLabel = document.getElementById("time");
@@ -241,6 +258,9 @@
     const stageSoundRecovery = new Audio(
       "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3"
     );
+    const refereeWhistle = new Audio(
+      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3"
+    );
 
     const playAudio = audioPlayer({
       beep:
@@ -255,6 +275,8 @@
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3",
       stageSoundRecovery:
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3",
+      refereeWhistle:
+        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
     });
 
     //programs
@@ -446,6 +468,14 @@
           beepSound.play();
         }
 
+        //halfwayBeep
+        if (
+          halfwayBeepButton.checked == true &&
+          i == Math.floor(arr[index].duration / 2)
+        ) {
+          refereeWhistle.play();
+        }
+
         //Labels
         let setAmount = arr[index].sets;
         let cycleAmount = arr[index].cycles;
@@ -483,6 +513,7 @@
       stageSoundRest.play();
       stageSoundRecovery.src = "";
       stageSoundRecovery.play();
+      refereeWhistle.play();
 
       beepSound.src =
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3";
@@ -496,6 +527,8 @@
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3";
       stageSoundRecovery.src =
         "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3";
+      refereeWhistle.src =
+        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3";
 
       totalTime = calculateTotalTime(arr);
       clearInterval(interval);
@@ -577,6 +610,7 @@
       startTimer();
     });
     clearButton.addEventListener("click", clear);
+    halfwayBeepButton.addEventListener("change", function () {});
 
     //Setting buttons
     settingsButton.addEventListener("click", function (e) {
