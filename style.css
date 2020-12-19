@@ -141,7 +141,7 @@ input[type="checkbox"]:checked + label {
 .settingOptions {
   font-family: "Courier New", Courier, monospace;
   color: white;
-  font-size: 27px;
+  font-size: 23px;
   margin: 0;
 }
 
