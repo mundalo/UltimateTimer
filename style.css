@@ -102,7 +102,7 @@ input[type="checkbox"]:checked + label {
   bottom: 0;
   width: 100%;
   display: flex;
-  position: absolute;
+  position: fixed;
   padding: 5px 0;
 }
 
@@ -186,7 +186,7 @@ input[type="tel"] {
   bottom: 0;
   width: 100%;
   display: flex;
-  position: absolute;
+  position: fixed;
   padding: 5px 0;
   justify-content: space-between;
 }
