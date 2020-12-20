@@ -194,6 +194,8 @@
     );
     const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
 
+    let arr = [];
+
     clear();
 
     //startTimer
@@ -400,96 +402,41 @@
       });
 
       programsSelect.value = programsSelect.options.length - 1;
-      programSelectChange();
-    });
-
-    exerciseIntervalInput.addEventListener("keypress", function (e) {
-      if (e.which == 13) {
-        restIntervalInput.focus();
-      }
-    });
-
-    restIntervalInput.addEventListener("keypress", function (e) {
-      if (e.which == 13) {
-        numberOfSetsInput.focus();
-      }
-    });
-
-    numberOfSetsInput.addEventListener("keypress", function (e) {
-      if (e.which == 13) {
-        recoveryIntervalInput.focus();
-      }
-    });
-
-    recoveryIntervalInput.addEventListener("keypress", function (e) {
-      if (e.which == 13) {
-        numberOfCyclesInput.focus();
-      }
-    });
-
-    numberOfCyclesInput.addEventListener("keypress", function (e) {
-      if (e.which == 13) {
-        settingsSubmitButton.click();
-      }
-    });
-
-    //Program select
-    function programSelectChange() {
       clear();
-      //Exercise times
-      let index = -1;
-      let setNumber = 0;
-      let cycleNumber = 0;
+      arr = generateExerciseStages(programs[programsSelect.value]);
+    });
 
-      let i = -1;
-      console.log(programs[programsSelect.value].exerciseInterval);
+    //SETTINGS PAGE - changes line by pressing enter
+    exerciseIntervalInput.addEventListener(
+      "keypress",
+      keypressHandler(() => restIntervalInput.focus())
+    );
 
-      i = programs[programsSelect.value].initialCountdown;
-      arr = [
-        {
-          duration: programs[programsSelect.value].initialCountdown,
-          stage: "Get ready!",
-          color: "white",
-          sets: 0,
-          cycles: 0,
-        },
-      ];
-      console.log(programs[programsSelect.value]);
+    restIntervalInput.addEventListener(
+      "keypress",
+      keypressHandler(() => numberOfSetsInput.focus())
+    );
 
-      //text
-      for (m = 0; m < programs[programsSelect.value].numberOfCycles; m++) {
-        let currentSet;
-        for (n = 0; n < programs[programsSelect.value].numberOfSets; n++) {
-          arr.push(
-            {
-              duration: programs[programsSelect.value].exerciseInterval,
-              stage: "Exercise!",
-              color: "#ff2f00",
-              sets: n + 1,
-              cycles: m + 1,
-            },
-            {
-              duration: programs[programsSelect.value].restInterval,
-              stage: "Rest!",
-              color: "#07ff07",
-              sets: n + 1,
-              cycles: m + 1,
-            }
-          );
-          currentSet = n + 1;
-        }
-        arr.push({
-          duration: programs[programsSelect.value].recoveryInterval,
-          stage: "Recovery",
-          color: "#0099ff",
-          sets: currentSet,
-          cycles: m + 1,
-        });
-      }
-      console.log(arr);
-    }
+    numberOfSetsInput.addEventListener(
+      "keypress",
+      keypressHandler(() => recoveryIntervalInput.focus())
+    );
 
-    programsSelect.addEventListener("change", programSelectChange);
+    recoveryIntervalInput.addEventListener(
+      "keypress",
+      keypressHandler(() => numberOfCyclesInput.focus())
+    );
+
+    numberOfCyclesInput.addEventListener(
+      "keypress",
+      keypressHandler(() => settingsSubmitButton.click())
+    );
+
+    programsSelect.addEventListener("change", function () {
+      clear();
+
+      arr = generateExerciseStages(programs[programsSelect.value]);
+    });
   </script>
   <script src="./wakeLock.js"></script>
 </html>
