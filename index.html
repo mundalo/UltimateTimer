@@ -166,7 +166,7 @@
     const settingsSubmitButton = document.getElementById(
       "settingsSubmitButton"
     );
-    var halfwayBeepButton = document.getElementById("halfwayBeep");
+    const halfwayBeepButton = document.getElementById("halfwayBeep");
 
     //Labels
     const timeLabel = document.getElementById("time");
@@ -192,47 +192,6 @@
       "recoveryIntervalInput"
     );
     const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
-
-    //audio
-
-    const beepSound = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3"
-    );
-    const stageSwitchSound = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3"
-    );
-    const stageSoundGetReady = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3"
-    );
-    const stageSoundExercise = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3"
-    );
-    const stageSoundRest = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3"
-    );
-    const stageSoundRecovery = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3"
-    );
-    const refereeWhistle = new Audio(
-      "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3"
-    );
-
-    const playAudio = audioPlayer({
-      beep:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3",
-      stageSwitch:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3",
-      stageSoundGetReady:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
-      stageSoundExercise:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3",
-      stageSoundRest:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3",
-      stageSoundRecovery:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3",
-      refereeWhistle:
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
-    });
 
     clear();
 
@@ -350,20 +309,13 @@
       stageSoundRecovery.play();
       refereeWhistle.play();
 
-      beepSound.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3";
-      stageSwitchSound.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3";
-      stageSoundGetReady.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3";
-      stageSoundExercise.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3";
-      stageSoundRest.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3";
-      stageSoundRecovery.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3";
-      refereeWhistle.src =
-        "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3";
+      beepSound.src = audioFileUrls.beep;
+      stageSwitchSound.src = audioFileUrls.stageSwitch;
+      stageGetReady.src = audioFileUrls.stageSoundGetReady;
+      stageSoundExercise.src = audioFileUrls.stageExercise;
+      stageSoundRest.src = audioFileUrls.stageRest;
+      stageSoundRecovery.src = audioFileUrls.stageRecovery;
+      refereeWhistle.src = audioFileUrls.refereeWhistle;
 
       totalTime = calculateTotalTime(arr);
       clearInterval(interval);

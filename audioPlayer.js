@@ -36,3 +36,38 @@ function audioPlayer(param) {
   }
 }
 
+//audio
+const audioFileUrls = {
+  beep:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3",
+  stageSwitch:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3",
+  stageGetReady:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
+  stageExercise:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3",
+  stageRest:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3",
+  stageRecovery:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3",
+  refereeWhistle:
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
+};
+
+const beepSound = new Audio(audioFileUrls.beep);
+const stageSwitchSound = new Audio(audioFileUrls.stageSwitch);
+const stageSoundGetReady = new Audio(audioFileUrls.stageGetReady);
+const stageSoundExercise = new Audio(audioFileUrls.stageExercise);
+const stageSoundRest = new Audio(audioFileUrls.stageRest);
+const stageSoundRecovery = new Audio(audioFileUrls.stageRecovery);
+const refereeWhistle = new Audio(audioFileUrls.refereeWhistle);
+
+const playAudio = audioPlayer({
+  beep: audioFileUrls.beep,
+  stageSwitch: audioFileUrls.stageSwitch,
+  stageSoundGetReady: audioFileUrls.stageGetReady,
+  stageSoundExercise: audioFileUrls.stageExercise,
+  stageSoundRest: audioFileUrls.stageRest,
+  stageSoundRecovery: audioFileUrls.stageRecovery,
+  refereeWhistle: audioFileUrls.refereeWhistle,
+});
