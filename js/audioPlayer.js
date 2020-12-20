@@ -41,9 +41,9 @@ const audioFileUrls = {
   beep:
     "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/beep.mp3",
   stageSwitch:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/stage-switch.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/stageSwitch.mp3",
   stageGetReady:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/get-ready.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/getReady.mp3",
   stageExercise:
     "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/exercise.mp3",
   stageRest:
