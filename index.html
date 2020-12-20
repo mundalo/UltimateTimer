@@ -10,126 +10,130 @@
   </head>
   <body>
     <div id="frame">
-    <div id="mainTimer">
-      <select name="programs" id="programs">
-        <!--default option-->
-        <option value="0">Select exercise</option>
-        <option value="1">Sitting Pike Stretch</option>
-        <option value="2">Sitting Leg Raise</option>
-        <option value="3">Wall V-Sit</option>
-        <option value="4">Weighted Jefferson Curl</option>
-        <option value="5">Weight. St. Shoulder Extension</option>
-        <option value="6">Lying Weigthed Stick Lift</option>
-        <option value="7">Pre Side Split</option>
-        <option value="8">Horse Stance</option>
-        <option value="9">Standing Side Leg Raise</option>
-        <option value="10">Pre Front Split</option>
-        <option value="11">Wall Quad Hip Flexor Stretch</option>
-        <option value="12">Standing Leg Raise</option>
-      </select>
-      <div class="topTitle">
-        <p id="stage">Select exercise</p>
+      <div id="mainTimer">
+        <select name="programs" id="programs">
+          <!--default option-->
+          <option value="0">Select exercise</option>
+          <option value="1">Sitting Pike Stretch</option>
+          <option value="2">Sitting Leg Raise</option>
+          <option value="3">Wall V-Sit</option>
+          <option value="4">Weighted Jefferson Curl</option>
+          <option value="5">Weight. St. Shoulder Extension</option>
+          <option value="6">Lying Weigthed Stick Lift</option>
+          <option value="7">Pre Side Split</option>
+          <option value="8">Horse Stance</option>
+          <option value="9">Standing Side Leg Raise</option>
+          <option value="10">Pre Front Split</option>
+          <option value="11">Wall Quad Hip Flexor Stretch</option>
+          <option value="12">Standing Leg Raise</option>
+        </select>
+        <div class="topTitle">
+          <p id="stage">Select exercise</p>
+        </div>
+        <div>
+          <p id="time">00:00</p>
+        </div>
+        <div class="metaData">
+          <div>
+            <p class="titleSetCycleTotalTime">Sets</p>
+            <p id="sets" class="titleTime">00</p>
+          </div>
+          <div>
+            <p class="titleSetCycleTotalTime">Cycles</p>
+            <p id="cycles" class="titleTime">00</p>
+          </div>
+          <div>
+            <p class="titleSetCycleTotalTime">Total time</p>
+            <p id="totalTime" class="titleTime">00:00</p>
+          </div>
+        </div>
+        <div class="checkboxDiv">
+          <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
+          <label class="checkbox" for="halfwayBeep"
+            ><i class="fas fa-stopwatch"></i><span class="checkmark"></span
+          ></label>
+        </div>
+        <!--Bottom line-->
+        <div class="navbar">
+          <div>
+            <button id="startButton" class="navButton">
+              <i class="fas fa-play"></i>
+            </button>
+            <button id="stopButton" class="navButton" disabled>
+              <i class="fas fa-pause"></i>
+            </button>
+          </div>
+          <div class="middleButton">
+            <button id="backButton" class="navButton">
+              <i class="fas fa-backward"></i>
+            </button>
+            <button id="forButton" class="navButton">
+              <i class="fas fa-forward"></i>
+            </button>
+          </div>
+          <div>
+            <button id="clearButton" class="navButton" disabled>
+              <i class="fas fa-undo"></i>
+            </button>
+            <button id="settingsButton" class="navButton">
+              <i class="fas fa-cog"></i>
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <p id="time">00:00</p>
-      </div>
-      <div class="metaData">
-        <div>
-          <p class="titleSetCycleTotalTime">Sets</p>
-          <p id="sets" class="titleTime">00</p>
+      <!--Settings-->
+      <div id="timerBlock">
+        <div id="stage2">
+          <p>Settings</p>
         </div>
-        <div>
-          <p class="titleSetCycleTotalTime">Cycles</p>
-          <p id="cycles" class="titleTime">00</p>
+        <div class="settingOptions">
+          <p class="exerciseColor">
+            Exercise:
+            <input
+              type="tel"
+              id="exerciseIntervalInput"
+              onfocus="this.select();"
+            />
+          </p>
+          <p class="restColor">
+            Rest:
+            <input type="tel" id="restIntervalInput" onfocus="this.select();" />
+          </p>
+          <p class="numberOfSetsColor">
+            Sets:
+            <input type="tel" id="numberOfSetsInput" onfocus="this.select();" />
+          </p>
+          <p class="recoveryColor">
+            Recovery:
+            <input
+              type="tel"
+              id="recoveryIntervalInput"
+              onfocus="this.select();"
+            />
+          </p>
+          <p class="numberOfCyclesColor">
+            Cycles:
+            <input
+              type="tel"
+              id="numberOfCyclesInput"
+              onfocus="this.select();"
+            />
+          </p>
         </div>
-        <div>
-          <p class="titleSetCycleTotalTime">Total time</p>
-          <p id="totalTime" class="titleTime">00:00</p>
-        </div>
-      </div>
-      <div class="checkboxDiv">
-        <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
-        <label class="checkbox" for="halfwayBeep"
-          ><i class="fas fa-stopwatch"></i><span class="checkmark"></span
-        ></label>
-      </div>
-      <!--Bottom line-->
-      <div class="navbar">
-        <div>
-          <button id="startButton" class="navButton">
-            <i class="fas fa-play"></i>
-          </button>
-          <button id="stopButton" class="navButton" disabled>
-            <i class="fas fa-pause"></i>
-          </button>
-        </div>
-        <div class="middleButton">
-          <button id="backButton" class="navButton">
-            <i class="fas fa-backward"></i>
-          </button>
-          <button id="forButton" class="navButton">
-            <i class="fas fa-forward"></i>
-          </button>
-        </div>
-        <div>
-          <button id="clearButton" class="navButton" disabled>
-            <i class="fas fa-undo"></i>
-          </button>
-          <button id="settingsButton" class="navButton">
-            <i class="fas fa-cog"></i>
-          </button>
+        <div class="navbar2">
+          <div>
+            <button id="settingsBackButton" class="navButton">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+          </div>
+          <div>
+            <button id="settingsSubmitButton" class="navButton">
+              <i class="fas fa-check"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
-    <!--Settings-->
-    <div id="timerBlock">
-      <div id="stage2">
-        <p>Settings</p>
-      </div>
-      <div class="settingOptions">
-        <p class="exerciseColor">
-          Exercise:
-          <input
-            type="tel"
-            id="exerciseIntervalInput"
-            onfocus="this.select();"
-          />
-        </p>
-        <p class="restColor">
-          Rest:
-          <input type="tel" id="restIntervalInput" onfocus="this.select();" />
-        </p>
-        <p class="numberOfSetsColor">
-          Sets:
-          <input type="tel" id="numberOfSetsInput" onfocus="this.select();" />
-        </p>
-        <p class="recoveryColor">
-          Recovery:
-          <input
-            type="tel"
-            id="recoveryIntervalInput"
-            onfocus="this.select();"
-          />
-        </p>
-        <p class="numberOfCyclesColor">
-          Cycles:
-          <input type="tel" id="numberOfCyclesInput" onfocus="this.select();" />
-        </p>
-      </div>
-      <div class="navbar2">
-        <div>
-        <button id="settingsBackButton" class="navButton">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-      </div>
-      <div></div>
-        <button id="settingsSubmitButton" class="navButton">
-          <i class="fas fa-check"></i>
-        </button>
-      </div>
-      </div>
-    </div>
-  </div>
   </body>
   <script src="./audioPlayer.js"></script>
   <script>
@@ -563,7 +567,7 @@
       startTimer();
     });
     clearButton.addEventListener("click", clear);
-  
+
     //Setting buttons
     settingsButton.addEventListener("click", function (e) {
       mainTimer.style.display = "none";

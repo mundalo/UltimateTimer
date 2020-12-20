@@ -150,6 +150,7 @@ input[type="checkbox"]:checked + label {
   font-size: 30px;
   margin-left: 15%;
   text-align: left;
+  margin-bottom: 84px;
 }
 
 .exerciseColor {
