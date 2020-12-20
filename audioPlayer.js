@@ -54,20 +54,20 @@ const audioFileUrls = {
     "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
 };
 
-const beepSound = new Audio(audioFileUrls.beep);
-const stageSwitchSound = new Audio(audioFileUrls.stageSwitch);
-const stageSoundGetReady = new Audio(audioFileUrls.stageGetReady);
-const stageSoundExercise = new Audio(audioFileUrls.stageExercise);
-const stageSoundRest = new Audio(audioFileUrls.stageRest);
-const stageSoundRecovery = new Audio(audioFileUrls.stageRecovery);
+const beep = new Audio(audioFileUrls.beep);
+const stageSwitch = new Audio(audioFileUrls.stageSwitch);
+const stageGetReady = new Audio(audioFileUrls.stageGetReady);
+const stageExercise = new Audio(audioFileUrls.stageExercise);
+const stageRest = new Audio(audioFileUrls.stageRest);
+const stageRecovery = new Audio(audioFileUrls.stageRecovery);
 const refereeWhistle = new Audio(audioFileUrls.refereeWhistle);
 
 const playAudio = audioPlayer({
   beep: audioFileUrls.beep,
   stageSwitch: audioFileUrls.stageSwitch,
-  stageSoundGetReady: audioFileUrls.stageGetReady,
-  stageSoundExercise: audioFileUrls.stageExercise,
-  stageSoundRest: audioFileUrls.stageRest,
-  stageSoundRecovery: audioFileUrls.stageRecovery,
+  stageGetReady: audioFileUrls.stageGetReady,
+  stageExercise: audioFileUrls.stageExercise,
+  stageRest: audioFileUrls.stageRest,
+  stageRecovery: audioFileUrls.stageRecovery,
   refereeWhistle: audioFileUrls.refereeWhistle,
 });

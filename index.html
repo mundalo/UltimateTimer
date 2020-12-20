@@ -137,6 +137,7 @@
   </body>
   <script src="./audioPlayer.js"></script>
   <script src="./defaultPrograms.js"></script>
+  <script src="./utils.js"></script>
   <script>
     //what needs to be fixed
     /*
@@ -195,15 +196,6 @@
 
     clear();
 
-    //TotalTime calculator
-    function calculateTotalTime(exercises, stage = 0) {
-      let total = 0;
-      for (let i = stage; i < exercises.length; i++) {
-        total = total + exercises[i].duration;
-      }
-      return total;
-    }
-
     //startTimer
     function startTimer() {
       startButton.style.display = "none";
@@ -222,8 +214,8 @@
         }
 
         if (index === 0 && i === arr[index].duration) {
-          stageSoundGetReady.play();
-          stageSwitchSound.play();
+          stageGetReady.play();
+          stageSwitch.play();
         }
 
         i--;
@@ -231,16 +223,16 @@
         if (i <= 0) {
           console.log(i);
           index++;
-          stageSwitchSound.play();
+          stageSwitch.play();
           switch (arr[index].stage) {
             case "Exercise!":
-              stageSoundExercise.play();
+              stageExercise.play();
               break;
             case "Rest!":
-              stageSoundRest.play();
+              stageRest.play();
               break;
             case "Recovery":
-              stageSoundRecovery.play();
+              stageRecovery.play();
               break;
           }
           if (index === arr.length - 1) {
@@ -258,7 +250,7 @@
           (i <= 3 && arr[index].duration > 3) ||
           (arr[index].duration <= 3 && i <= arr[index].duration - 1)
         ) {
-          beepSound.play();
+          beep.play();
         }
 
         //halfwayBeep
@@ -295,26 +287,26 @@
       clearButton.disabled = false;
       halfwayBeepButton.disabled = true;
 
-      beepSound.src = "";
-      beepSound.play();
-      stageSwitchSound.src = "";
-      stageSwitchSound.play();
-      stageSoundGetReady.src = "";
-      stageSoundGetReady.play();
-      stageSoundExercise.src = "";
-      stageSoundExercise.play();
-      stageSoundRest.src = "";
-      stageSoundRest.play();
-      stageSoundRecovery.src = "";
-      stageSoundRecovery.play();
+      beep.src = "";
+      beep.play();
+      stageSwitch.src = "";
+      stageSwitch.play();
+      stageGetReady.src = "";
+      stageGetReady.play();
+      stageExercise.src = "";
+      stageExercise.play();
+      stageRest.src = "";
+      stageRest.play();
+      stageRecovery.src = "";
+      stageRecovery.play();
       refereeWhistle.play();
 
-      beepSound.src = audioFileUrls.beep;
-      stageSwitchSound.src = audioFileUrls.stageSwitch;
-      stageGetReady.src = audioFileUrls.stageSoundGetReady;
-      stageSoundExercise.src = audioFileUrls.stageExercise;
-      stageSoundRest.src = audioFileUrls.stageRest;
-      stageSoundRecovery.src = audioFileUrls.stageRecovery;
+      beep.src = audioFileUrls.beep;
+      stageSwitch.src = audioFileUrls.stageSwitch;
+      stageGetReady.src = audioFileUrls.stageGetReady;
+      stageExercise.src = audioFileUrls.stageExercise;
+      stageRest.src = audioFileUrls.stageRest;
+      stageRecovery.src = audioFileUrls.stageRecovery;
       refereeWhistle.src = audioFileUrls.refereeWhistle;
 
       totalTime = calculateTotalTime(arr);
@@ -345,33 +337,6 @@
       setsLabel.innerHTML = "00";
       cyclesLabel.innerHTML = "00";
       totalTimeLabel.innerHTML = "00:00";
-    }
-
-    //function formats time
-    function formatTime(time) {
-      const sec = time % 60;
-      const minutes = Math.floor(time / 60);
-      let secStr = sec;
-      let minutesStr = minutes;
-
-      if (sec <= 9) {
-        secStr = `0${sec}`;
-      }
-
-      if (minutes <= 9) {
-        minutesStr = `0${minutes}`;
-      }
-
-      return `${minutesStr}:${secStr}`;
-    }
-
-    //function formats sets and cycles
-    function formatSetCycles(amount) {
-      let amountNumb = amount;
-      if (amount <= 9) {
-        amountNumb = `0${amount}`;
-      }
-      return `${amountNumb}`;
     }
 
     //stop & clear button click
