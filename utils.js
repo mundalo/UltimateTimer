@@ -1,4 +1,42 @@
 //util functions just need parameters to work
+function maybePlaySound(i, stage, halfwayBeepButton, soundsArr) {
+    if (stage.index === 0 && i === stage.duration - 1) {
+      soundsArr.stageGetReady.play();
+      soundsArr.stageSwitch.play();
+    }
+
+    if (i === stage.duration) {
+      soundsArr.stageSwitch.play();
+      switch (stage.stage) {
+        case "Exercise!":
+          soundsArr.stageExercise.play();
+          break;
+        case "Rest!":
+          soundsArr.stageRest.play();
+          break;
+        case "Recovery":
+          soundsArr.stageRecovery.play();
+          break;
+      }
+    }
+
+    if (
+      (i <= 3 && stage.duration > 3) ||
+      (stage.duration <= 3 && i <= stage.duration - 1)
+    ) {
+      soundsArr.beep.play();
+    }
+
+    //halfwayBeep
+    if (
+      halfwayBeepButton.checked == true &&
+      i == Math.floor(stage.duration / 2) &&
+      stage.duration >= 8
+    ) {
+      soundsArr.refereeWhistle.play();
+    }
+  }
+
 //TotalTime calculator
 function calculateTotalTime(exercises, stage = 0) {
   let total = 0;
@@ -47,12 +85,8 @@ function keypressHandler(fn) {
 //Program select
 function generateExerciseStages(exerciseMeasures) {
   //Exercise times
-  let index = -1;
-  let setNumber = 0;
-  let cycleNumber = 0;
-  let i = -1;
+  let index = 0;
 
-  i = exerciseMeasures.initialCountdown;
   const exerciseStages = [
     {
       duration: exerciseMeasures.initialCountdown,
@@ -60,6 +94,7 @@ function generateExerciseStages(exerciseMeasures) {
       color: "white",
       sets: 0,
       cycles: 0,
+      index: index++,
     },
   ];
 
@@ -73,6 +108,7 @@ function generateExerciseStages(exerciseMeasures) {
           color: "#ff2f00",
           sets: n + 1,
           cycles: m + 1,
+          index: index++,
         },
         {
           duration: exerciseMeasures.restInterval,
@@ -80,6 +116,7 @@ function generateExerciseStages(exerciseMeasures) {
           color: "#07ff07",
           sets: n + 1,
           cycles: m + 1,
+          index: index++,
         }
       );
       currentSet = n + 1;
@@ -90,6 +127,7 @@ function generateExerciseStages(exerciseMeasures) {
       color: "#0099ff",
       sets: currentSet,
       cycles: m + 1,
+      index: index++,
     });
   }
 

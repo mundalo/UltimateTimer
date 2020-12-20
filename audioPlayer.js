@@ -39,19 +39,19 @@ function audioPlayer(param) {
 //audio
 const audioFileUrls = {
   beep:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/beep.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/beep.mp3",
   stageSwitch:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/stage-switch.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/stage-switch.mp3",
   stageGetReady:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/get-ready.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/get-ready.mp3",
   stageExercise:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/exercise.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/exercise.mp3",
   stageRest:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/rest.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/rest.mp3",
   stageRecovery:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/recovery.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/recovery.mp3",
   refereeWhistle:
-    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/refereeWhistle.mp3",
+    "https://raw.githubusercontent.com/Mundal1994/UltimateTimer/main/audioFiles/refereeWhistle.mp3",
 };
 
 const beep = new Audio(audioFileUrls.beep);
@@ -61,6 +61,16 @@ const stageExercise = new Audio(audioFileUrls.stageExercise);
 const stageRest = new Audio(audioFileUrls.stageRest);
 const stageRecovery = new Audio(audioFileUrls.stageRecovery);
 const refereeWhistle = new Audio(audioFileUrls.refereeWhistle);
+
+const sounds = {
+  beep,
+  stageSwitch,
+  stageGetReady,
+  stageExercise,
+  stageRest,
+  stageRecovery,
+  refereeWhistle,
+}
 
 const playAudio = audioPlayer({
   beep: audioFileUrls.beep,

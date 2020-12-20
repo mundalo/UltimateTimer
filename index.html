@@ -141,14 +141,14 @@
   <script>
     //what needs to be fixed
     /*
-        javascript - refactoring
+            javascript - refactoring
 
-        the whistle if you put it on horse stance is very low compared to on the rest? why?
+            the whistle if you put it on horse stance is very low compared to on the rest? why?
 
-        make audio heigher in volume somehow? on phone it cant go that heigh
+            make audio heigher in volume somehow? on phone it cant go that heigh
 
-        was able to align the select bar on my computer but it doesn't show on my phone
-        */
+            was able to align the select bar on my computer but it doesn't show on my phone
+            */
 
     //Main pages
     const mainTimer = document.getElementById("mainTimer");
@@ -207,7 +207,7 @@
       backwardsButton.style.display = "inline-block";
       forwardsButton.style.display = "inline-block";
 
-      interval = setInterval(function () {
+      function tick() {
         if (!arr || arr.length === 0) {
           //when you have select exercise in drop down - nothing in it
           clear(); //default exercise
@@ -215,54 +215,20 @@
           return;
         }
 
-        if (index === 0 && i === arr[index].duration) {
-          stageGetReady.play();
-          stageSwitch.play();
-        }
-
         i--;
 
+        //checks if it is the last stage and then stops the timer
         if (i <= 0) {
-          console.log(i);
           index++;
-          stageSwitch.play();
-          switch (arr[index].stage) {
-            case "Exercise!":
-              stageExercise.play();
-              break;
-            case "Rest!":
-              stageRest.play();
-              break;
-            case "Recovery":
-              stageRecovery.play();
-              break;
-          }
           if (index === arr.length - 1) {
             clear();
 
             return;
           }
-
           i = (arr[index] || {}).duration;
-          console.log(index);
         }
 
-        //audio
-        if (
-          (i <= 3 && arr[index].duration > 3) ||
-          (arr[index].duration <= 3 && i <= arr[index].duration - 1)
-        ) {
-          beep.play();
-        }
-
-        //halfwayBeep
-        if (
-          halfwayBeepButton.checked == true &&
-          i == Math.floor(arr[index].duration / 2) &&
-          arr[index].duration >= 8
-        ) {
-          refereeWhistle.play();
-        }
+        maybePlaySound(i, arr[index], halfwayBeepButton, sounds);
 
         //Labels
         let setAmount = arr[index].sets;
@@ -280,7 +246,10 @@
         totalTime--;
 
         timeLabel.innerHTML = formatTime(i);
-      }, 1000);
+      }
+
+      tick();
+      interval = setInterval(tick, 1000);
     }
 
     //start button click
