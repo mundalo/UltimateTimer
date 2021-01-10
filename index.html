@@ -59,7 +59,7 @@
             <button id="startButton" class="navButton">
               <i class="fas fa-play"></i>
             </button>
-            <button id="stopButton" class="navButton" disabled>
+            <button id="pauseButton" class="navButton" disabled>
               <i class="fas fa-pause"></i>
             </button>
           </div>
@@ -82,7 +82,7 @@
         </div>
       </div>
       <!--Settings-->
-      <div id="timerBlock">
+      <div id="settingsBlock">
         <div id="stage2">
           <p>Settings</p>
         </div>
@@ -141,47 +141,17 @@
   <script>
     //what needs to be fixed
     /*
-            javascript - refactoring
+                javascript - refactoring
 
-            the whistle if you put it on horse stance is very low compared to on the rest? why?
+                the whistle if you put it on horse stance is very low compared to on the rest? why?
 
-            make audio heigher in volume somehow? on phone it cant go that heigh
+                make audio heigher in volume somehow? on phone it cant go that heigh
 
-            was able to align the select bar on my computer but it doesn't show on my phone
-            */
-
-    //Main pages
-    const mainTimer = document.getElementById("mainTimer");
-    const timerBlock = document.getElementById("timerBlock");
-
-    //Buttons
-    const startButton = document.getElementById("startButton");
+                was able to align the select bar on my computer but it doesn't show on my phone
+                */
+    const programsSelect = document.getElementById("programs");
     let interval;
     let totalTime = 0;
-    const stopButton = document.getElementById("stopButton");
-    const clearButton = document.getElementById("clearButton");
-    const backwardsButton = document.getElementById("backButton");
-    const forwardsButton = document.getElementById("forButton");
-    const settingsButton = document.getElementById("settingsButton");
-    const settingsBackButton = document.getElementById("settingsBackButton");
-    const settingsSubmitButton = document.getElementById(
-      "settingsSubmitButton"
-    );
-    const halfwayBeepButton = document.getElementById("halfwayBeep");
-
-    //Labels
-    const timeLabel = document.getElementById("time");
-    const stageLabel = document.getElementById("stage");
-    const programsSelect = document.getElementById("programs");
-    const setsLabel = document.getElementById("sets");
-    const cyclesLabel = document.getElementById("cycles");
-    const totalTimeLabel = document.getElementById("totalTime");
-    const totalSetsAndCyclesLabel = document.getElementById(
-      "totalSetsAndCycles"
-    );
-    const titleSetCycleTotalTimeLabel = document.getElementById(
-      "titleSetCycleTotalTime"
-    );
 
     //Settings Inputs
     const exerciseIntervalInput = document.getElementById(
@@ -194,164 +164,287 @@
     );
     const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
 
+    const halfwayBeepButton = document.getElementById("halfwayBeep");
+
     let arr = [];
+
+    class UI {
+      constructor() {
+        //Main pages
+        this.mainTimer = document.getElementById("mainTimer");
+        this.settingsBlock = document.getElementById("settingsBlock");
+
+        //Buttons
+        this.startButton = document.getElementById("startButton");
+        this.pauseButton = document.getElementById("pauseButton");
+        this.clearButton = document.getElementById("clearButton");
+        this.backwardsButton = document.getElementById("backButton");
+        this.forwardsButton = document.getElementById("forButton");
+        this.settingsButton = document.getElementById("settingsButton");
+        this.settingsBackButton = document.getElementById("settingsBackButton");
+        this.settingsSubmitButton = document.getElementById(
+          "settingsSubmitButton"
+        );
+        this.halfwayBeepButton = document.getElementById("halfwayBeep");
+
+        //Labels
+        this.timeLabel = document.getElementById("time");
+        this.stageLabel = document.getElementById("stage");
+        this.setsLabel = document.getElementById("sets");
+        this.cyclesLabel = document.getElementById("cycles");
+        this.totalTimeLabel = document.getElementById("totalTime");
+        this.totalSetsAndCyclesLabel = document.getElementById(
+          "totalSetsAndCycles"
+        );
+        this.titleSetCycleTotalTimeLabel = document.getElementById(
+          "titleSetCycleTotalTime"
+        );
+        this.programsSelect = document.getElementById("programs");
+
+        // settings inputs
+        this.exerciseIntervalInput = document.getElementById(
+          "exerciseIntervalInput"
+        );
+        this.restIntervalInput = document.getElementById("restIntervalInput");
+        this.numberOfSetsInput = document.getElementById("numberOfSetsInput");
+        this.recoveryIntervalInput = document.getElementById(
+          "recoveryIntervalInput"
+        );
+        this.numberOfCyclesInput = document.getElementById(
+          "numberOfCyclesInput"
+        );
+
+        //SETTINGS PAGE - changes line by pressing enter
+        this.exerciseIntervalInput.addEventListener(
+          "keypress",
+          keypressHandler(() => restIntervalInput.focus())
+        );
+
+        this.restIntervalInput.addEventListener(
+          "keypress",
+          keypressHandler(() => numberOfSetsInput.focus())
+        );
+
+        this.numberOfSetsInput.addEventListener(
+          "keypress",
+          keypressHandler(() => recoveryIntervalInput.focus())
+        );
+
+        this.recoveryIntervalInput.addEventListener(
+          "keypress",
+          keypressHandler(() => numberOfCyclesInput.focus())
+        );
+
+        this.numberOfCyclesInput.addEventListener(
+          "keypress",
+          keypressHandler(() => this.settingsSubmitButton.click())
+        );
+      }
+
+      displaySettings() {
+        this.mainTimer.style.display = "none";
+        this.settingsBlock.style.display = "block";
+      }
+
+      hideSettings() {
+        this.mainTimer.style.display = "block";
+        this.settingsBlock.style.display = "none";
+      }
+
+      // UI functions
+      timerRunningUIState() {
+        this.startButton.style.display = "none";
+        this.settingsButton.style.display = "none";
+        this.pauseButton.style.display = "inline-block";
+        this.clearButton.style.display = "inline-block";
+        this.backwardsButton.style.display = "inline-block";
+        this.forwardsButton.style.display = "inline-block";
+        this.pauseButton.disabled = false;
+        this.clearButton.disabled = false;
+        this.halfwayBeepButton.disabled = true;
+      }
+
+      timerClearedUIState() {
+        this.startButton.disabled = false;
+        this.halfwayBeepButton.disabled = false;
+
+        this.startButton.style.display = "inline-block";
+        this.settingsButton.style.display = "inline-block";
+        this.pauseButton.style.display = "none";
+        this.clearButton.style.display = "none";
+        this.backwardsButton.style.display = "none";
+        this.forwardsButton.style.display = "none";
+
+        this.timeLabel.style.color = "white";
+        this.stageLabel.style.color = "white";
+
+        this.timeLabel.innerHTML = "00:00";
+        this.stageLabel.innerHTML = "Select exercise";
+        this.setsLabel.innerHTML = "00";
+        this.cyclesLabel.innerHTML = "00";
+        this.totalTimeLabel.innerHTML = "00:00";
+
+        this.hideSettings();
+      }
+
+      timerPausedUIState() {
+        this.startButton.disabled = false;
+        this.halfwayBeepButton.disabled = false;
+        this.startButton.style.display = "inline-block";
+        this.settingsButton.style.display = "none";
+        this.pauseButton.style.display = "none";
+      }
+
+      updateTimerLabels() {
+        this.stageLabel.style.color = arr[index].color;
+        this.timeLabel.style.color = arr[index].color;
+
+        this.stageLabel.innerHTML = arr[index].stage;
+
+        this.setsLabel.innerHTML = `${formatSetCycles(arr[index].sets)}`;
+        this.cyclesLabel.innerHTML = `${formatSetCycles(arr[index].cycles)}`;
+
+        this.totalTimeLabel.innerHTML = formatTime(totalTime);
+
+        this.timeLabel.innerHTML = formatTime(i);
+      }
+
+      onStartButtonClick(clickHandler) {
+        this.startButton.addEventListener("click", clickHandler);
+      }
+
+      onPauseButtonClick(clickHandler) {
+        this.pauseButton.addEventListener("click", clickHandler);
+      }
+
+      onClearButtonClick(clickHandler) {
+        this.clearButton.addEventListener("click", clickHandler);
+      }
+
+      onForwardsButtonClick(clickHandler) {
+        this.forwardsButton.addEventListener("click", clickHandler);
+      }
+
+      onBackwardsButtonClick(clickHandler) {
+        this.backwardsButton.addEventListener("click", clickHandler);
+      }
+
+      onSettingsButtonClick(clickHandler) {
+        this.settingsButton.addEventListener("click", clickHandler);
+      }
+
+      onSettingsBackButtonClick(clickHandler) {
+        this.settingsBackButton.addEventListener("click", clickHandler);
+      }
+
+      onSettingsSubmitButtonClick(clickHandler) {
+        this.settingsSubmitButton.addEventListener("click", clickHandler);
+      }
+
+      onProgramsSelectChange(changeHandler) {
+        this.programsSelect.addEventListener("change", changeHandler);
+      }
+    }
+
+    const ui = new UI();
 
     clear();
 
-    //startTimer
-    function startTimer() {
-      startButton.style.display = "none";
-      settingsButton.style.display = "none";
-      stopButton.style.display = "inline-block";
-      clearButton.style.display = "inline-block";
-      backwardsButton.style.display = "inline-block";
-      forwardsButton.style.display = "inline-block";
+    //tick function used when timer
+    function tick() {
+      if (!arr || arr.length === 0) {
+        //when you have select exercise in drop down - nothing in it
+        clear(); //default exercise
 
-      function tick() {
-        if (!arr || arr.length === 0) {
-          //when you have select exercise in drop down - nothing in it
-          clear(); //default exercise
+        return;
+      }
+
+      i--;
+
+      //checks if it is the last stage and then stops the timer
+      if (i <= 0) {
+        index++;
+        if (index === arr.length - 1) {
+          clear();
 
           return;
         }
-
-        i--;
-
-        //checks if it is the last stage and then stops the timer
-        if (i <= 0) {
-          index++;
-          if (index === arr.length - 1) {
-            clear();
-
-            return;
-          }
-          i = (arr[index] || {}).duration;
-        }
-
-        maybePlaySound(i, arr[index], halfwayBeepButton, sounds);
-
-        //Labels
-        let setAmount = arr[index].sets;
-        let cycleAmount = arr[index].cycles;
-
-        stageLabel.style.color = arr[index].color;
-        timeLabel.style.color = arr[index].color;
-
-        stageLabel.innerHTML = arr[index].stage;
-
-        setsLabel.innerHTML = `${formatSetCycles(arr[index].sets)}`;
-        cyclesLabel.innerHTML = `${formatSetCycles(arr[index].cycles)}`;
-
-        totalTimeLabel.innerHTML = formatTime(totalTime);
-        totalTime--;
-
-        timeLabel.innerHTML = formatTime(i);
+        i = (arr[index] || {}).duration;
       }
 
+      maybePlaySound(i, arr[index], halfwayBeepButton, sounds);
+      /*
+      let setAmount = arr[index].sets;
+      let cycleAmount = arr[index].cycles;
+*/
+      ui.updateTimerLabels();
+
+      totalTime--;
+    }
+
+    //startTimer
+    function startTimer() {
       tick();
       interval = setInterval(tick, 1000);
     }
 
     //start button click
-    function click(e) {
-      stopButton.disabled = false;
-      clearButton.disabled = false;
-      halfwayBeepButton.disabled = true;
+    function startTimerClick(e) {
+      ui.timerRunningUIState();
 
-      beep.src = "";
-      beep.play();
-      stageSwitch.src = "";
-      stageSwitch.play();
-      stageGetReady.src = "";
-      stageGetReady.play();
-      stageExercise.src = "";
-      stageExercise.play();
-      stageRest.src = "";
-      stageRest.play();
-      stageRecovery.src = "";
-      stageRecovery.play();
-      refereeWhistle.play();
-
-      beep.src = audioFileUrls.beep;
-      stageSwitch.src = audioFileUrls.stageSwitch;
-      stageGetReady.src = audioFileUrls.stageGetReady;
-      stageExercise.src = audioFileUrls.stageExercise;
-      stageRest.src = audioFileUrls.stageRest;
-      stageRecovery.src = audioFileUrls.stageRecovery;
-      refereeWhistle.src = audioFileUrls.refereeWhistle;
+      resetAudioURLs();
 
       totalTime = calculateTotalTime(arr);
       clearInterval(interval);
       startTimer();
     }
 
-    //reset function
+    // reset function
     function clear() {
-      startButton.disabled = false;
-      halfwayBeepButton.disabled = false;
       clearInterval(interval);
       i = programs[programsSelect.value].initialCountdown;
       index = 0;
 
-      startButton.style.display = "inline-block";
-      settingsButton.style.display = "inline-block";
-      stopButton.style.display = "none";
-      clearButton.style.display = "none";
-      backwardsButton.style.display = "none";
-      forwardsButton.style.display = "none";
-
-      timeLabel.style.color = "white";
-      stageLabel.style.color = "white";
-
-      timeLabel.innerHTML = "00:00";
-      stageLabel.innerHTML = "Select exercise";
-      setsLabel.innerHTML = "00";
-      cyclesLabel.innerHTML = "00";
-      totalTimeLabel.innerHTML = "00:00";
+      ui.timerClearedUIState();
     }
 
-    //stop & clear button click
-    startButton.addEventListener("click", click);
-    stopButton.addEventListener("click", function () {
-      startButton.disabled = false;
-      halfwayBeepButton.disabled = false;
-      startButton.style.display = "inline-block";
-      settingsButton.style.display = "none";
-      stopButton.style.display = "none";
+    // stop & clear button click
+    ui.onStartButtonClick(startTimerClick);
+    ui.onPauseButtonClick(function () {
+      ui.timerPausedUIState();
       clearInterval(interval);
     });
 
-    forwardsButton.addEventListener("click", function () {
+    ui.onForwardsButtonClick(function () {
       clearInterval(interval);
       i = 1;
       totalTime = calculateTotalTime(arr, index + 1);
       startTimer();
     });
-    backwardsButton.addEventListener("click", function () {
+
+    ui.onBackwardsButtonClick(function () {
       clearInterval(interval);
       i = 1;
       index = Math.max(index - 2, -1);
       totalTime = calculateTotalTime(arr, index + 1);
       startTimer();
     });
-    clearButton.addEventListener("click", clear);
+
+    ui.onClearButtonClick(clear);
 
     //Setting buttons
-    settingsButton.addEventListener("click", function (e) {
-      mainTimer.style.display = "none";
-      timerBlock.style.display = "block";
+    ui.onSettingsButtonClick(function (e) {
+      ui.displaySettings();
 
       exerciseIntervalInput.focus();
     });
 
-    settingsBackButton.addEventListener("click", function (e) {
-      mainTimer.style.display = "block";
-      timerBlock.style.display = "none";
+    ui.onSettingsBackButtonClick(function (e) {
+      ui.hideSettings();
     });
 
-    settingsSubmitButton.addEventListener("click", function (e) {
-      mainTimer.style.display = "block";
-      timerBlock.style.display = "none";
+    ui.onSettingsSubmitButtonClick(function (e) {
+      ui.hideSettings();
 
       const option = document.createElement("option");
       option.value = programsSelect.options.length;
@@ -375,33 +468,7 @@
       arr = generateExerciseStages(programs[programsSelect.value]);
     });
 
-    //SETTINGS PAGE - changes line by pressing enter
-    exerciseIntervalInput.addEventListener(
-      "keypress",
-      keypressHandler(() => restIntervalInput.focus())
-    );
-
-    restIntervalInput.addEventListener(
-      "keypress",
-      keypressHandler(() => numberOfSetsInput.focus())
-    );
-
-    numberOfSetsInput.addEventListener(
-      "keypress",
-      keypressHandler(() => recoveryIntervalInput.focus())
-    );
-
-    recoveryIntervalInput.addEventListener(
-      "keypress",
-      keypressHandler(() => numberOfCyclesInput.focus())
-    );
-
-    numberOfCyclesInput.addEventListener(
-      "keypress",
-      keypressHandler(() => settingsSubmitButton.click())
-    );
-
-    programsSelect.addEventListener("change", function () {
+    ui.onProgramsSelectChange(function () {
       clear();
 
       arr = generateExerciseStages(programs[programsSelect.value]);

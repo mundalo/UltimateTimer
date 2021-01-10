@@ -2,26 +2,27 @@ const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const sources = {};
 
 function audioPlayer(param) {
-
-  Object.keys(param).forEach(key => {
+  Object.keys(param).forEach((key) => {
     // sources[key] = audioCtx.createBufferSource();
     var request = new XMLHttpRequest();
 
-    request.open('GET', param[key], true);
+    request.open("GET", param[key], true);
 
-    request.responseType = 'arraybuffer';
-
+    request.responseType = "arraybuffer";
 
     request.onload = function () {
       var audioData = request.response;
 
-      audioCtx.decodeAudioData(audioData, function (buffer) {
-        sources[key] = buffer;
-      },
+      audioCtx.decodeAudioData(
+        audioData,
+        function (buffer) {
+          sources[key] = buffer;
+        },
         function (e) {
           console.log("Error with decoding audio data" + e.err);
-        });
-    }
+        }
+      );
+    };
 
     request.send();
   });
@@ -32,8 +33,8 @@ function audioPlayer(param) {
 
     source.connect(audioCtx.destination);
     source.loop = false;
-    source.start(0)
-  }
+    source.start(0);
+  };
 }
 
 //audio
@@ -70,7 +71,7 @@ const sounds = {
   stageRest,
   stageRecovery,
   refereeWhistle,
-}
+};
 
 const playAudio = audioPlayer({
   beep: audioFileUrls.beep,
@@ -81,3 +82,29 @@ const playAudio = audioPlayer({
   stageRecovery: audioFileUrls.stageRecovery,
   refereeWhistle: audioFileUrls.refereeWhistle,
 });
+
+// Didn't work on iOS
+// Since iOS requires user interaction for playing sounds
+function resetAudioURLs() {
+  beep.src = "";
+  beep.play();
+  stageSwitch.src = "";
+  stageSwitch.play();
+  stageGetReady.src = "";
+  stageGetReady.play();
+  stageExercise.src = "";
+  stageExercise.play();
+  stageRest.src = "";
+  stageRest.play();
+  stageRecovery.src = "";
+  stageRecovery.play();
+  refereeWhistle.play();
+
+  beep.src = audioFileUrls.beep;
+  stageSwitch.src = audioFileUrls.stageSwitch;
+  stageGetReady.src = audioFileUrls.stageGetReady;
+  stageExercise.src = audioFileUrls.stageExercise;
+  stageRest.src = audioFileUrls.stageRest;
+  stageRecovery.src = audioFileUrls.stageRecovery;
+  refereeWhistle.src = audioFileUrls.refereeWhistle;
+}
