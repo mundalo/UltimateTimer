@@ -123,7 +123,7 @@
         <div class="navbar2">
           <div>
             <button id="settingsBackButton" class="navButton">
-              <i class="fas fa-arrow-left"></i>
+              <i class="fas fa-programStagesow-left"></i>
             </button>
           </div>
           <div>
@@ -167,13 +167,13 @@
 
     const halfwayBeepButton = document.getElementById("halfwayBeep");
 
-    let arr = [];
+    let programStages = [];
 
     clear();
 
     //tick function used when timer
     function tick() {
-      if (!arr || arr.length === 0) {
+      if (!programStages || programStages.length === 0) {
         //when you have select exercise in drop down - nothing in it
         clear(); //default exercise
 
@@ -185,20 +185,17 @@
       //checks if it is the last stage and then stops the timer
       if (i <= 0) {
         index++;
-        if (index === arr.length - 1) {
+        if (index === programStages.length - 1) {
           clear();
 
           return;
         }
-        i = (arr[index] || {}).duration;
+        i = (programStages[index] || {}).duration;
       }
 
-      maybePlaySound(i, arr[index], halfwayBeepButton, sounds);
-      /*
-      let setAmount = arr[index].sets;
-      let cycleAmount = arr[index].cycles;
-*/
-      ui.updateTimerLabels(arr[index], totalTime, i);
+      maybePlaySound(i, programStages[index], halfwayBeepButton, sounds);
+
+      ui.updateTimerLabels(programStages[index], totalTime, i);
 
       totalTime--;
     }
@@ -215,7 +212,7 @@
 
       resetAudioURLs();
 
-      totalTime = calculateTotalTime(arr);
+      totalTime = calculateTotalTime(programStages);
       clearInterval(interval);
       startTimer();
     }
@@ -239,7 +236,7 @@
     ui.onForwardsButtonClick(function () {
       clearInterval(interval);
       i = 1;
-      totalTime = calculateTotalTime(arr, index + 1);
+      totalTime = calculateTotalTime(programStages, index + 1);
       startTimer();
     });
 
@@ -247,7 +244,7 @@
       clearInterval(interval);
       i = 1;
       index = Math.max(index - 2, -1);
-      totalTime = calculateTotalTime(arr, index + 1);
+      totalTime = calculateTotalTime(programStages, index + 1);
       startTimer();
     });
 
@@ -286,13 +283,13 @@
 
       programsSelect.value = programsSelect.options.length - 1;
       clear();
-      arr = generateExerciseStages(programs[programsSelect.value]);
+      programStages = generateExerciseStages(programs[programsSelect.value]);
     });
 
     ui.onProgramsSelectChange(function () {
       clear();
 
-      arr = generateExerciseStages(programs[programsSelect.value]);
+      programStages = generateExerciseStages(programs[programsSelect.value]);
     });
   </script>
   <script src="./js/noSleep.js"></script>
