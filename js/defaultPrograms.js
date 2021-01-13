@@ -116,4 +116,28 @@ const programs = [
     recoveryInterval: 5,
     numberOfCycles: 6,
   },
+  {
+    initialCountdown: 7,
+    exerciseInterval: 25,
+    restInterval: 25,
+    numberOfSets: 4,
+    recoveryInterval: 80,
+    numberOfCycles: 5,
+  },
+  {
+    initialCountdown: 7,
+    exerciseInterval: 120,
+    restInterval: 30,
+    numberOfSets: 1,
+    recoveryInterval: 90,
+    numberOfCycles: 11,
+  },
+  {
+    initialCountdown: 60,
+    exerciseInterval: 10,
+    restInterval: 60,
+    numberOfSets: 8,
+    recoveryInterval: 0,
+    numberOfCycles: 1,
+  },
 ];
