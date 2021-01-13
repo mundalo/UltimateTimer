@@ -117,6 +117,7 @@ const programs = [
     numberOfCycles: 6,
   },
   {
+    //Footwork Drills
     initialCountdown: 7,
     exerciseInterval: 25,
     restInterval: 25,
@@ -125,14 +126,16 @@ const programs = [
     numberOfCycles: 5,
   },
   {
+    //Press To Handstand Routine
     initialCountdown: 7,
     exerciseInterval: 120,
-    restInterval: 30,
+    restInterval: 90,
     numberOfSets: 1,
-    recoveryInterval: 90,
+    recoveryInterval: 30,
     numberOfCycles: 11,
   },
   {
+    //V-sit Routine
     initialCountdown: 60,
     exerciseInterval: 10,
     restInterval: 60,
