@@ -94,6 +94,20 @@ input[type="checkbox"]:checked + label {
   margin-top: 3%;
 }
 
+.audioAndWhistlee {
+  display: flex;
+  text-align: center;
+}
+
+#audio {
+  margin-left: 15%;
+  flex: 1;
+}
+
+#audioSelect {
+  margin-left: 25%;
+}
+
 /*BOTTOM OF PAGE*/
 /*Start, stop buttons etc...*/
 .navbar {

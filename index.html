@@ -50,11 +50,22 @@
             <p id="totalTime" class="titleTime">00:00</p>
           </div>
         </div>
-        <div class="checkboxDiv">
-          <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
-          <label class="checkbox" for="halfwayBeep"
-            ><i class="fas fa-stopwatch"></i><span class="checkmark"></span
-          ></label>
+        <div class="audioAndWhistlee">
+          <div>
+            <p id="audio"><i class="fas fa-volume-up"></i></p>
+          </div>
+          <select name="audioSelect" id="audioSelect">
+            <!--default option-->
+            <option value="default">default</option>
+            <option value="version1">Version 1</option>
+            <option value="random">Random</option>
+          </select>
+          <div class="checkboxDiv">
+            <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
+            <label class="checkbox" for="halfwayBeep"
+              ><i class="fas fa-stopwatch"></i><span class="checkmark"></span
+            ></label>
+          </div>
         </div>
         <!--Bottom line-->
         <div class="navbar">
@@ -205,11 +216,11 @@
       ui.timerClearedUIState();
     }
 
-    // stop & clear button click
+    // start button click
     ui.onStartButtonClick(function () {
       ui.timerRunningUIState();
 
-      resetAudioURLs();
+      resetAudioURLs(ui.audioFileSelect.value);
 
       totalTime = calculateTotalTime(programStages);
       clearInterval(interval);

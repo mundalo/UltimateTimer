@@ -158,6 +158,10 @@ class UI {
     this.programsSelect.addEventListener("change", changeHandler);
   }
 
+  get audioFileSelect() {
+    return document.getElementById("audioSelect");
+  }
+
   get programsSelect() {
     return document.getElementById("programs");
   }
