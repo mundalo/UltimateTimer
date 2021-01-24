@@ -152,7 +152,6 @@
 
     let interval;
     let totalTime = 0;
-
     let programStages = [];
 
     clear();
@@ -168,6 +167,8 @@
 
       i--;
 
+      totalTime--;
+
       //checks if it is the last stage and then stops the timer
       if (i <= 0) {
         index++;
@@ -179,28 +180,20 @@
         i = (programStages[index] || {}).duration;
       }
 
-      maybePlaySound(i, programStages[index], ui.halfwayBeepButton, sounds);
+      maybePlaySound(
+        i,
+        programStages[index],
+        ui.halfwayBeepButton.checked,
+        sounds
+      );
 
       ui.updateTimerLabels(programStages[index], totalTime, i);
-
-      totalTime--;
     }
 
     //startTimer
     function startTimer() {
       tick();
       interval = setInterval(tick, 1000);
-    }
-
-    //start button click
-    function startTimerClick(e) {
-      ui.timerRunningUIState();
-
-      resetAudioURLs();
-
-      totalTime = calculateTotalTime(programStages);
-      clearInterval(interval);
-      startTimer();
     }
 
     // reset function
@@ -213,7 +206,16 @@
     }
 
     // stop & clear button click
-    ui.onStartButtonClick(startTimerClick);
+    ui.onStartButtonClick(function () {
+      ui.timerRunningUIState();
+
+      resetAudioURLs();
+
+      totalTime = calculateTotalTime(programStages);
+      clearInterval(interval);
+      startTimer();
+    });
+
     ui.onPauseButtonClick(function () {
       ui.timerPausedUIState();
       clearInterval(interval);

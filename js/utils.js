@@ -1,41 +1,41 @@
 //util functions just need parameters to work
-function maybePlaySound(i, stage, halfwayBeepButton, soundsArr) {
-    if (stage.index === 0 && i === stage.duration - 1) {
-      soundsArr.stageGetReady.play();
-      soundsArr.stageSwitch.play();
-    }
+function maybePlaySound(i, stage, shouldBeepHalfway, soundsArr) {
+  if (stage.index === 0 && i === stage.duration - 1) {
+    soundsArr.stageGetReady.play();
+    soundsArr.stageSwitch.play();
+  }
 
-    if (i === stage.duration) {
-      soundsArr.stageSwitch.play();
-      switch (stage.stage) {
-        case "Exercise!":
-          soundsArr.stageExercise.play();
-          break;
-        case "Rest!":
-          soundsArr.stageRest.play();
-          break;
-        case "Recovery":
-          soundsArr.stageRecovery.play();
-          break;
-      }
-    }
-
-    if (
-      (i <= 3 && stage.duration > 3) ||
-      (stage.duration <= 3 && i <= stage.duration - 1)
-    ) {
-      soundsArr.beep.play();
-    }
-
-    //halfwayBeep
-    if (
-      halfwayBeepButton.checked == true &&
-      i == Math.floor(stage.duration / 2) &&
-      stage.duration >= 8
-    ) {
-      soundsArr.refereeWhistle.play();
+  if (i === stage.duration) {
+    soundsArr.stageSwitch.play();
+    switch (stage.stage) {
+      case "Exercise!":
+        soundsArr.stageExercise.play();
+        break;
+      case "Rest!":
+        soundsArr.stageRest.play();
+        break;
+      case "Recovery":
+        soundsArr.stageRecovery.play();
+        break;
     }
   }
+
+  if (
+    (i <= 3 && stage.duration > 3) ||
+    (stage.duration <= 3 && i <= stage.duration - 1)
+  ) {
+    soundsArr.beep.play();
+  }
+
+  //halfwayBeep
+  if (
+    shouldBeepHalfway == true &&
+    i == Math.floor(stage.duration / 2) &&
+    stage.duration >= 8
+  ) {
+    soundsArr.refereeWhistle.play();
+  }
+}
 
 //TotalTime calculator
 function calculateTotalTime(exercises, stage = 0) {
@@ -75,12 +75,12 @@ function formatSetCycles(amount) {
 
 //SETTINGS PAGE - changes line by pressing enter
 function keypressHandler(fn) {
-    return function (e) {
-      if (e.which === 13) {
-        fn();
-      }
-    };
-  }
+  return function (e) {
+    if (e.which === 13) {
+      fn();
+    }
+  };
+}
 
 //Program select
 function generateExerciseStages(exerciseMeasures) {
