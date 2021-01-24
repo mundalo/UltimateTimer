@@ -13,7 +13,6 @@ class UI {
     this.settingsButton = document.getElementById("settingsButton");
     this.settingsBackButton = document.getElementById("settingsBackButton");
     this.settingsSubmitButton = document.getElementById("settingsSubmitButton");
-    this.halfwayBeepButton = document.getElementById("halfwayBeep");
 
     //Labels
     this.timeLabel = document.getElementById("time");
@@ -27,18 +26,6 @@ class UI {
     this.titleSetCycleTotalTimeLabel = document.getElementById(
       "titleSetCycleTotalTime"
     );
-    this.programsSelect = document.getElementById("programs");
-
-    // settings inputs
-    this.exerciseIntervalInput = document.getElementById(
-      "exerciseIntervalInput"
-    );
-    this.restIntervalInput = document.getElementById("restIntervalInput");
-    this.numberOfSetsInput = document.getElementById("numberOfSetsInput");
-    this.recoveryIntervalInput = document.getElementById(
-      "recoveryIntervalInput"
-    );
-    this.numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
 
     //SETTINGS PAGE - changes line by pressing enter
     this.exerciseIntervalInput.addEventListener(
@@ -169,6 +156,34 @@ class UI {
 
   onProgramsSelectChange(changeHandler) {
     this.programsSelect.addEventListener("change", changeHandler);
+  }
+
+  get programsSelect() {
+    return document.getElementById("programs");
+  }
+
+  get exerciseIntervalInput() {
+    return document.getElementById("exerciseIntervalInput");
+  }
+
+  get restIntervalInput() {
+    return document.getElementById("restIntervalInput");
+  }
+
+  get numberOfSetsInput() {
+    return document.getElementById("numberOfSetsInput");
+  }
+
+  get recoveryIntervalInput() {
+    return document.getElementById("recoveryIntervalInput");
+  }
+
+  get numberOfCyclesInput() {
+    return document.getElementById("numberOfCyclesInput");
+  }
+
+  get halfwayBeepButton() {
+    return document.getElementById("halfwayBeep");
   }
 }
 

@@ -147,28 +147,11 @@
     /*
       javascript - refactoring
 
-      the whistle if you put it on horse stance is very low compared to on the rest? why?
-
-      make audio heigher in volume somehow? on phone it cant go that heigh
-
       was able to align the select bar on my computer but it doesn't show on my phone
     */
-    const programsSelect = document.getElementById("programs");
+
     let interval;
     let totalTime = 0;
-
-    //Settings Inputs
-    const exerciseIntervalInput = document.getElementById(
-      "exerciseIntervalInput"
-    );
-    const restIntervalInput = document.getElementById("restIntervalInput");
-    const numberOfSetsInput = document.getElementById("numberOfSetsInput");
-    const recoveryIntervalInput = document.getElementById(
-      "recoveryIntervalInput"
-    );
-    const numberOfCyclesInput = document.getElementById("numberOfCyclesInput");
-
-    const halfwayBeepButton = document.getElementById("halfwayBeep");
 
     let programStages = [];
 
@@ -196,7 +179,7 @@
         i = (programStages[index] || {}).duration;
       }
 
-      maybePlaySound(i, programStages[index], halfwayBeepButton, sounds);
+      maybePlaySound(i, programStages[index], ui.halfwayBeepButton, sounds);
 
       ui.updateTimerLabels(programStages[index], totalTime, i);
 
@@ -223,7 +206,7 @@
     // reset function
     function clear() {
       clearInterval(interval);
-      i = programs[programsSelect.value].initialCountdown;
+      i = programs[ui.programsSelect.value].initialCountdown;
       index = 0;
 
       ui.timerClearedUIState();
@@ -257,7 +240,7 @@
     ui.onSettingsButtonClick(function (e) {
       ui.displaySettings();
 
-      exerciseIntervalInput.focus();
+      ui.exerciseIntervalInput.focus();
     });
 
     ui.onSettingsBackButtonClick(function (e) {
@@ -268,31 +251,31 @@
       ui.hideSettings();
 
       const option = document.createElement("option");
-      option.value = programsSelect.options.length;
-      option.text = `New Exercise: ${exerciseIntervalInput.value || 1}, ${
-        restIntervalInput.value || 1
-      }, ${numberOfSetsInput.value || 1}`;
-      programsSelect.appendChild(option);
+      option.value = ui.programsSelect.options.length;
+      option.text = `New Exercise: ${ui.exerciseIntervalInput.value || 1}, ${
+        ui.restIntervalInput.value || 1
+      }, ${ui.numberOfSetsInput.value || 1}`;
+      ui.programsSelect.appendChild(option);
 
       programs.push({
         //New Exercise
         initialCountdown: 7,
-        exerciseInterval: parseInt(exerciseIntervalInput.value) || 1,
-        restInterval: parseInt(restIntervalInput.value) || 1,
-        numberOfSets: parseInt(numberOfSetsInput.value) || 1,
-        recoveryInterval: parseInt(recoveryIntervalInput.value) || 1,
-        numberOfCycles: parseInt(numberOfCyclesInput.value) || 1,
+        exerciseInterval: parseInt(ui.exerciseIntervalInput.value) || 1,
+        restInterval: parseInt(ui.restIntervalInput.value) || 1,
+        numberOfSets: parseInt(ui.numberOfSetsInput.value) || 1,
+        recoveryInterval: parseInt(ui.recoveryIntervalInput.value) || 1,
+        numberOfCycles: parseInt(ui.numberOfCyclesInput.value) || 1,
       });
 
-      programsSelect.value = programsSelect.options.length - 1;
+      ui.programsSelect.value = ui.programsSelect.options.length - 1;
       clear();
-      programStages = generateExerciseStages(programs[programsSelect.value]);
+      programStages = generateExerciseStages(programs[ui.programsSelect.value]);
     });
 
     ui.onProgramsSelectChange(function () {
       clear();
 
-      programStages = generateExerciseStages(programs[programsSelect.value]);
+      programStages = generateExerciseStages(programs[ui.programsSelect.value]);
     });
   </script>
   <script src="./js/noSleep.js"></script>
