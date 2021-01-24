@@ -51,15 +51,17 @@
           </div>
         </div>
         <div class="audioAndWhistlee">
-          <div>
-            <p id="audio"><i class="fas fa-volume-up"></i></p>
+          <div class="audioAll">
+            <div>
+              <p id="audio"><i class="fas fa-volume-up"></i></p>
+            </div>
+            <select name="audioSelect" id="audioSelect">
+              <!--default option-->
+              <option value="default">default</option>
+              <option value="version1">Version 1</option>
+              <option value="random">Random</option>
+            </select>
           </div>
-          <select name="audioSelect" id="audioSelect">
-            <!--default option-->
-            <option value="default">default</option>
-            <option value="version1">Version 1</option>
-            <option value="random">Random</option>
-          </select>
           <div class="checkboxDiv">
             <input type="checkbox" id="halfwayBeep" value="halfwayBeep" />
             <label class="checkbox" for="halfwayBeep"
