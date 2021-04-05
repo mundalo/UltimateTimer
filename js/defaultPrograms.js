@@ -119,8 +119,8 @@ const programs = [
   {
     //Footwork Drills
     initialCountdown: 7,
-    exerciseInterval: 25,
-    restInterval: 25,
+    exerciseInterval: 30,
+    restInterval: 30,
     numberOfSets: 4,
     recoveryInterval: 80,
     numberOfCycles: 5,
