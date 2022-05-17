@@ -7,9 +7,7 @@ Project: Making a workout timer that contains both hard-coded workouts and timed
 
 HOW TO USE
 
-To use go to this link
-
-https://mundal1994.github.io/UltimateTimer/
+Follow this link to try it out >> https://mundal1994.github.io/UltimateTimer/
 
 
 CREDIT
